@@ -1,6 +1,7 @@
 {
-    "name": "app-view",
+    "name": "@cogears/app-view",
     "version": "1.0.0",
+    "description": "application service",
     "type": "module",
     "types": "types/index.d.ts",
     "files": [
@@ -22,5 +23,17 @@
         "typescript": "^5.2.2",
         "vite": "^5.2.0",
         "vue-tsc": "^2.0.6"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/cogears/app-view.git"
+    },
+    "author": "stone",
+    "bugs": {
+        "url": "https://github.com/cogears/app-view/issues"
+    },
+    "homepage": "https://github.com/cogears/app-view#readme",
+    "engines": {
+        "node": ">= 20.0.0"
     }
 }

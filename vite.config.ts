@@ -5,6 +5,11 @@ import { resolve } from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [vue()],
+    resolve: {
+        alias: [
+            { find: 'types', replacement: resolve(__dirname, 'types') },
+        ]
+    },
     build: {
         lib: {
             // Could also be a dictionary or array of multiple entry points

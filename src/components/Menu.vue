@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import MenuItem from './MenuItem.vue';
 import { MenuOption } from 'types';
+import MenuItem from './MenuItem.vue';
 
 defineProps<{
     options: MenuOption[],
