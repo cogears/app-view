@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import { Column } from 'types';
 import { computed } from 'vue';
-import { fetchValue } from '../common/dataUtil';
-import * as filters from '../common/filters';
-import { Column } from './index';
+import formatter from '../common/formatter';
+import { fetchValue } from './options';
 const props = defineProps<{
     item: any,
     column: Column
@@ -15,8 +15,10 @@ const render = computed(() => {
     if (props.column.render) {
         renderValue = props.column.render(renderValue, props.column, props.item)
     }
-    if (props.column.format) {
-        renderValue = filters.execute(props.column.format, renderValue, ...(props.column.formatArgs || []))
+    //@ts-ignore
+    if (props.column.format && formatter[props.column.format]) {
+        //@ts-ignore
+        renderValue = formatter[props.column.format](renderValue, ...(props.column.formatArgs || []))
     }
     return renderValue
 })

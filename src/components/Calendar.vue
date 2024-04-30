@@ -1,5 +1,5 @@
 <script lang='ts' setup>
-import * as filters from '../common/filters';
+import formatter from '../common/formatter';
 import { inject, reactive } from 'vue';
 import ViewContext from '../ViewContext';
 import ComboboxInput from './ComboboxInput.vue';
@@ -45,7 +45,7 @@ async function onShowCalendar(rect: DOMRect) {
     <ComboboxInput :placeholder="placeholder" :disabled="disabled" :readonly="readonly" :frameless="frameless"
         :onDrop="onShowCalendar">
         <template v-if="value">
-            {{ filters.date(value.getTime(), format) }}
+            {{ formatter.date(value.getTime(), format) }}
         </template>
         <template #suffix>
             <IconCalendar :size="14"></IconCalendar>

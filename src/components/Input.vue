@@ -1,7 +1,7 @@
 <script lang='ts' setup>
+import { IInput } from 'types';
 import { inject, reactive, ref, watchEffect } from 'vue';
 import ViewContext from '../ViewContext';
-import { IInput } from './index';
 
 const context = inject(ViewContext.NAME) as ViewContext
 const props = withDefaults(defineProps<{

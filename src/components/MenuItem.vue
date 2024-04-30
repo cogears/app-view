@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import { MenuOption } from 'types';
 import { computed, reactive, ref } from 'vue';
 import Checkbox from './Checkbox.vue';
 import Menu from './Menu.vue';
 import IconRight from './icons/IconRight.vue';
-import { MenuOption } from './index';
 
 const props = defineProps<{
     item: MenuOption,

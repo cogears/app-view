@@ -4,8 +4,8 @@ export default {
 }
 </script>
 <script setup lang="ts">
+import { Column, ColumnHeader } from 'types';
 import { computed } from 'vue';
-import { Column, ColumnHeader } from './index';
 
 const props = defineProps<{
     head: ColumnHeader,

@@ -1,8 +1,6 @@
-interface KeyboardEventListener {
-    (e: KeyboardEvent): void
-}
+import { KeyboardEventListener, KeyboardManager } from 'types';
 
-export class KeyboardUtil {
+export class KeyboardUtil implements KeyboardManager {
     private readonly _keyboardListeners: KeyboardEventListener[] = []
     private _monopolyKeyboardListeners: number = 0
     constructor() {

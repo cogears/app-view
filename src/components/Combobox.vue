@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import { MenuOption } from 'types';
 import { computed, inject, reactive } from 'vue';
 import ViewContext from '../ViewContext';
 import ComboboxInput from './ComboboxInput.vue';
-import { MenuOption } from './index';
 import Input from './Input.vue';
 const context = inject(ViewContext.NAME) as ViewContext
 const props = withDefaults(defineProps<{

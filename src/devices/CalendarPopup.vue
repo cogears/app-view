@@ -1,5 +1,5 @@
 <script lang='ts' setup>
-import * as filters from '../common/filters';
+import formatter from '../common/formatter';
 import { computed, inject, onMounted, reactive, ref } from 'vue';
 import ViewContext, { Transaction } from '../ViewContext';
 import { CALENDAR } from './index';
@@ -52,8 +52,8 @@ function onClose() {
     temp.visible = false;
     if (current.value) {
         if (origin.value) {
-            let originDate = filters.date(origin.value.getTime())
-            let newDate = filters.date(current.value.getTime())
+            let originDate = formatter.date(origin.value.getTime())
+            let newDate = formatter.date(current.value.getTime())
             if (originDate == newDate) {
                 dialogTransaction.abort()
             } else {
@@ -152,13 +152,13 @@ function update() {
                 <span v-for="n in temp.week" :key="'p' + n"></span>
                 <span v-for="n in temp.days" :key="n">
                     <a :class="{ selected: isDay(n), today: isToday(n), mark: isMark(n) }" @click="onSelected(n)">
-                        {{ filters.n2(n) }}
+                        {{ formatter.n2(n) }}
                     </a>
                 </span>
             </div>
             <div class="bottom border">
                 <i></i>
-                <label>今天: {{ filters.date(temp.today.getTime()) }}</label>
+                <label>今天: {{ formatter.date(temp.today.getTime()) }}</label>
             </div>
         </div>
     </Transition>

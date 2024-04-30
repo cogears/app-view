@@ -1,6 +1,5 @@
-export interface EventListener {
-    (event: string, ...args: any[]): void;
-}
+import { EventListener } from 'types'
+
 export default class EventDispatcher {
     private _eventHandlers: Record<string, EventListener[]> = {};
 

@@ -1,0 +1,15 @@
+import IconCalendar from "./IconCalendar.vue";
+import IconClose from "./IconClose.vue";
+import IconLoading from "./IconLoading.vue";
+import IconNext from "./IconNext.vue";
+import IconNext2 from "./IconNext2.vue";
+import IconRight from "./IconRight.vue";
+
+export {
+    IconCalendar,
+    IconClose,
+    IconLoading,
+    IconNext,
+    IconNext2,
+    IconRight,
+}

@@ -1,6 +1,6 @@
 import ViewContext, { Transaction } from "../ViewContext"
 import EventDispatcher from "../common/EventDispatcher"
-import { MenuOption } from "../components"
+import { MenuOption, DeviceManager as IDeviceManager } from "types"
 
 export const TOAST = 'toast'
 export const TOOLTIP = 'tooltip'
@@ -11,7 +11,7 @@ export const CONTEXT_MENU = 'context-menu'
 export const CALENDAR = 'calendar'
 export const LOADING = 'loading'
 
-export default class DeviceManager extends EventDispatcher {
+export default class DeviceManager extends EventDispatcher implements IDeviceManager {
     private readonly _context: ViewContext
     constructor(context: ViewContext) {
         super()

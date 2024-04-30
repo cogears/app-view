@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { MenuOption } from 'types';
 import { computed, inject, onMounted, reactive, ref } from 'vue';
 import ViewContext, { Transaction } from '../ViewContext';
-import { MenuOption } from '../components';
 import Menu from '../components/Menu.vue';
 import { CONTEXT_MENU } from './index';
 

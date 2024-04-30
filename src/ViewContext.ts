@@ -1,25 +1,40 @@
 import { Router } from "vue-router";
 import EventDispatcher from "./common/EventDispatcher";
+import keyboard, { KeyboardUtil } from "./common/keyboard";
+import { fetchValue } from './components/options';
 import DeviceManager from "./devices";
-import { getQuery } from './common/webUtil'
-import keyboard, { KeyboardUtil } from "./common/keyboard"
 
 export default class ViewContext extends EventDispatcher {
     static readonly NAME = Symbol('ViewContext')
-
     readonly router: Router
+    readonly query: Record<string, string>
     readonly device = new DeviceManager(this)
-    readonly query = getQuery(window.location.search)
 
     private readonly _transactions: Array<Transaction<ViewContext>> = []
 
     constructor(router: Router) {
         super()
+        this.query = this.parseQuery(window.location.search)
         this.router = router
     }
 
     get keyboard(): KeyboardUtil {
         return keyboard
+    }
+
+    parseQuery(search: string): Record<string, string> {
+        let query: any = {}
+        let pairs = search.substring(1).split('&').map(s => s.split('='))
+        for (let ks of pairs) {
+            if (ks[0]) {
+                query[ks[0]] = ks[1]
+            }
+        }
+        return query
+    }
+
+    fetchValue(data: any, key: string) {
+        return fetchValue(data, key)
     }
 
     startup<T extends Transaction<any>>(transactionClass: Class<T>): T {
@@ -46,7 +61,6 @@ export default class ViewContext extends EventDispatcher {
         }
     }
 }
-
 
 export class Transaction<T extends ViewContext> extends EventDispatcher {
     static readonly COMMIT = 'commit'

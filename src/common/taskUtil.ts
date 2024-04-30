@@ -1,10 +1,4 @@
-interface TaskFunction {
-    (...args: Array<any>): Promise<any>
-}
-interface TaskHandle {
-    run(...args: Array<any>): void
-    cancel(): void
-}
+import { PromiseTask, TaskFunction, TaskHandle } from 'types'
 
 class PromiseManager {
     private _waitTask: Array<{ resolve: Function, reject: Function }> = []
@@ -85,13 +79,6 @@ export function packTask(task: Function, delay: number = 0): TaskFunction {
             }
         })
     }
-}
-
-export interface PromiseTask<T> {
-    cancel(): void
-    then(deployTask: (data: T) => void): PromiseTask<T>
-    catch(errorHandler: Function): PromiseTask<T>
-    finally(finallyHandler: Function): PromiseTask<T>
 }
 
 export function executeLoadTask<T>(loadTask: () => Promise<T>): PromiseTask<T> {

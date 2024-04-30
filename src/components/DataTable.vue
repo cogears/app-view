@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { packTask } from '../common/taskUtil';
+import { Column, ColumnHeader, } from 'types';
 import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue';
+import { packTask } from '../common/taskUtil';
 import DataTableHead from './DataTableHead.vue';
 import DataTableItem from './DataTableItem.vue';
 import Loading from './Loading.vue';
-import { Column, ColumnHeader, sort as sort0 } from './index';
+import { sort as sort0 } from './options';
 const head = ref<HTMLDivElement>()
 const scrollbarX = ref<HTMLDivElement>()
 const scrollbarY = ref<HTMLDivElement>()

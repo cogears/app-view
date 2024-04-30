@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { Option } from 'types';
 import { reactive, ref, watchEffect } from 'vue';
-import { Option } from '.';
 
 const props = defineProps<{
     options: Option[],

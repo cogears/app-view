@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { IScroller, ScrollEvent } from 'types';
 import { onBeforeUnmount, onMounted, reactive, ref } from 'vue';
-import { IScroller, ScrollEvent } from './index';
 withDefaults(defineProps<{
     scrollX?: boolean,
     border?: boolean,

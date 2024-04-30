@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import Switcher from '../../../components/Switcher.vue'
-import TabPages from '../../../components/TabPages.vue'
-import Input from '../../../components/Input.vue';
+import { Column } from 'types';
 import { inject, reactive, ref } from 'vue';
-import Calendar from '../../../components/Calendar.vue'
-import Button from '../../../components/Button.vue'
 import ViewContext from '../../../ViewContext';
-import Combobox from '../../../components/Combobox.vue'
+import Button from '../../../components/Button.vue';
+import Calendar from '../../../components/Calendar.vue';
 import Checkbox from '../../../components/Checkbox.vue';
-import Radio from '../../../components/Radio.vue';
-import SwitchBar from '../../../components/SwitchBar.vue';
-import Scroller from '../../../components/Scroller.vue'
+import Combobox from '../../../components/Combobox.vue';
 import DataTable from '../../../components/DataTable.vue';
-import { Column } from '../../../components';
+import Input from '../../../components/Input.vue';
+import Radio from '../../../components/Radio.vue';
+import Scroller from '../../../components/Scroller.vue';
+import SwitchBar from '../../../components/SwitchBar.vue';
+import Switcher from '../../../components/Switcher.vue';
+import TabPages from '../../../components/TabPages.vue';
 
 const context = inject(ViewContext.NAME) as ViewContext
 const options = [

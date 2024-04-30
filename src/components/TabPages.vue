@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Option } from '.';
+import { Option } from 'types';
 
 withDefaults(defineProps<{
     options: Option[],

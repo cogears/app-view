@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
 import IconCalendar from '../../../components/icons/IconCalendar.vue';
 import IconClose from '../../../components/icons/IconClose.vue';
 import IconLoading from '../../../components/icons/IconLoading.vue';
