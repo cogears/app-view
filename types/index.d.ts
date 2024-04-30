@@ -55,6 +55,9 @@ export class Transaction<T extends ViewContext> extends EventDispatcher {
     abort(): void
 }
 
+export interface RenderOptions {
+    routes: RouteRecordRaw[],
+    theme?: string
+}
 
-
-export function render(): void
+export function render(options: RenderOptions): void

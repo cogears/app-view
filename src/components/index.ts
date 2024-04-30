@@ -1,3 +1,4 @@
+import Accordion from './Accordion.vue'
 import Button from './Button.vue'
 import Calendar from './Calendar.vue'
 import Checkbox from './Checkbox.vue'
@@ -14,6 +15,7 @@ import TabPages from './TabPages.vue'
 
 export * from './icons'
 export {
+    Accordion,
     Button,
     Calendar,
     Checkbox,

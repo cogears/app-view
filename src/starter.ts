@@ -1,18 +1,14 @@
-import { createApp } from "vue";
-import { RouteRecordRaw, createRouter, createWebHashHistory } from "vue-router";
-import Root from './Root.vue';
+import { createApp, h } from "vue";
+import { RouterView, createRouter, createWebHashHistory } from "vue-router";
 import ViewContext from "./ViewContext";
+import Devices from './devices/Root.vue';
 import './styles/base.scss';
-
-interface RenderOptions {
-    routes: RouteRecordRaw[],
-    theme?: string
-}
+import { RenderOptions } from 'types';
 
 export function render(options: RenderOptions) {
     const router = newRouter(options)
     const context = new ViewContext(router)
-    const app = createApp(Root)
+    const app = createApp(newRootView())
     app.use(router)
     app.provide(ViewContext.NAME, context)
     app.directive('bg', (el, binding) => {
@@ -27,7 +23,9 @@ export function render(options: RenderOptions) {
     document.documentElement.className = options.theme || 'light'
     return context
 }
-
+function newRootView() {
+    return () => [h(RouterView), h(Devices)]
+}
 function newRouter(options: RenderOptions) {
     return createRouter({
         routes: options.routes,

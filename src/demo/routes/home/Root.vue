@@ -1,200 +1,62 @@
 <script setup lang="ts">
-import { Column } from 'types';
-import { inject, reactive, ref } from 'vue';
-import ViewContext from '../../../ViewContext';
-import Button from '../../../components/Button.vue';
-import Calendar from '../../../components/Calendar.vue';
-import Checkbox from '../../../components/Checkbox.vue';
-import Combobox from '../../../components/Combobox.vue';
-import DataTable from '../../../components/DataTable.vue';
-import Input from '../../../components/Input.vue';
-import Radio from '../../../components/Radio.vue';
-import Scroller from '../../../components/Scroller.vue';
-import SwitchBar from '../../../components/SwitchBar.vue';
-import Switcher from '../../../components/Switcher.vue';
-import TabPages from '../../../components/TabPages.vue';
+import Accordion from '@/components/Accordion.vue';
+import { reactive } from 'vue';
+import Pview from './Pview.vue';
 
-const context = inject(ViewContext.NAME) as ViewContext
-const options = [
-    { key: 'aa', label: 'aa' },
-    { key: '', label: 'aa' },
-    {
-        key: 'bb', label: 'bb', children: [
-            {
-                key: 'aa1', label: 'aa1', children: [
-                    { key: 'cc3', label: 'cccc3' },
-                    { key: 'cc4', label: 'cccc4' },
-                ]
-            },
-            {
-                key: 'aa2', label: 'aa2', children: [
-                    { key: 'cc1', label: 'cccc1' },
-                    { key: 'cc2', label: 'cccc2' },
-                    { key: 'cc1', label: 'cccc1' },
-                    { key: 'cc2', label: 'cccc2' },
-                    { key: 'cc1', label: 'cccc1' },
-                    { key: 'cc2', label: 'cccc2' },
-                    { key: 'cc1', label: 'cccc1' },
-                    { key: 'cc2', label: 'cccc2' },
-                    { key: 'cc1', label: 'cccc1' },
-                    { key: 'cc2', label: 'cccc2' },
-                ]
-            },
-        ]
-    }
-]
-const tpages = [
-    { key: 'p1', label: 'p1' },
-    { key: 'p2', label: 'p2' },
-    { key: 'p3', label: 'p3' },
-]
-const temp = reactive({
-    selected: false,
-    radioValue: 'hehe',
-    comValue: '',
-    date: new Date(),
-    tvalue: 'p1',
+const accordionData = reactive({
+    current: 'k1',
+    options: [
+        { key: 'k1', label: 'kl1' },
+        { key: 'k2', label: 'kl2' },
+    ]
 })
-
-const columns = ref<Column[]>([
-    { key: 'key', label: 'f1', width: 100 },
-    { key: 'label', label: 'f2', width: 100 },
-    { key: 'p3', label: 'f3', width: 100 },
-])
-
-function onAlert() {
-    context.device.prompt('hello world')
-}
-
-function onLoading() {
-    context.device.loading(true, 'hello world')
-}
 
 </script>
 <template>
-    <div class="panel">
-        <div class="options" style="height: 300px;">
-            <Scroller :border="true">
-                <div class="options">
-                    <Button color="blue" @click="onAlert">确定</Button>
-                    <Button color="blue" round @click="onLoading">确定</Button>
-                    <Button color="blue" round disabled>确定</Button>
-                    <Button color="blue" theme="line">确定</Button>
-                    <Button color="blue" theme="line" round>确定</Button>
-                </div>
-                <div class="options">
-                    <Button color="red">red</Button>
-                    <Button color="red" round>red</Button>
-                    <Button color="red" round disabled>red</Button>
-                    <Button color="red" theme="line">red</Button>
-                    <Button color="red" theme="line" round>red</Button>
-                </div>
-                <div class="options">
-                    <Button color="green">green</Button>
-                    <Button color="green" round>green</Button>
-                    <Button color="green" round disabled>green</Button>
-                    <Button color="green" theme="line">green</Button>
-                    <Button color="green" theme="line" round>green</Button>
-                </div>
-                <div class="options">
-                    <Button color="orange">orange</Button>
-                    <Button color="orange" round>orange</Button>
-                    <Button color="orange" round disabled>orange</Button>
-                    <Button color="orange" theme="line">orange</Button>
-                    <Button color="orange" theme="line" round>orange</Button>
-                </div>
-                <div class="options">
-                    <Button color="yellow">yellow</Button>
-                    <Button color="yellow" round>yellow</Button>
-                    <Button color="yellow" round disabled>yellow</Button>
-                    <Button color="yellow" theme="line">yellow</Button>
-                    <Button color="yellow" theme="line" round>yellow</Button>
-                </div>
-                <div class="options">
-                    <Button color="purple">purple</Button>
-                    <Button color="purple" round>purple</Button>
-                    <Button color="purple" round disabled>purple</Button>
-                    <Button color="purple" theme="line">purple</Button>
-                    <Button color="purple" theme="line" round>purple</Button>
-                </div>
-                <div class="options">
-                    <Button color="magenta">magenta</Button>
-                    <Button color="magenta" round>magenta</Button>
-                    <Button color="magenta" round disabled>magenta</Button>
-                    <Button color="magenta" theme="line">magenta</Button>
-                    <Button color="magenta" theme="line" round>magenta</Button>
-                </div>
-                <div class="options">
-                    <Button color="cyan">cyan</Button>
-                    <Button color="cyan" round>cyan</Button>
-                    <Button color="cyan" round disabled>cyan</Button>
-                    <Button color="cyan" theme="line">cyan</Button>
-                    <Button color="cyan" theme="line" round>cyan</Button>
-                </div>
-                <div class="options">
-                    <Button color="gray">取消</Button>
-                    <Button color="gray" round>取消</Button>
-                    <Button color="gray" round disabled>取消</Button>
-                    <Button color="gray" theme="line">取消</Button>
-                    <Button color="gray" theme="line" round>取消</Button>
-                </div>
-            </Scroller>
+    <div class="app-page">
+        <div class="top border frame">
+            <b>App View</b>
         </div>
-        <div class="options">
-            <TabPages :options="tpages" v-model:value="temp.tvalue">
-                <template #p1>
-                    <div class="options">
-                        <div class="wrap">
-                            <Input placeholder="请输入内容..." />
-                        </div>
-                        <div class="wrap">
-                            <Combobox :options="options" v-model:value="temp.comValue" style="width: 100px"></Combobox>
-                        </div>
-                        <div class="wrap">
-                            <Calendar v-model:value="temp.date"></Calendar>
-                        </div>
-                        <div class="wrap">
-                            <SwitchBar :options="options" v-model:value="temp.comValue"></SwitchBar>
-                        </div>
-                    </div>
-                </template>
-                <template #p2>
-                    <div class="options">
-                        <div style="width: 200px;">
-                            <Checkbox v-model:selected="temp.selected">选中选中选中选中选中选中选中选中选中选中选中选中选中选中选中选中</Checkbox>
-                        </div>
-                        <div style="width: 200px;">
-                            <Radio v-model:selected="temp.radioValue" value="hehe">选中选中选中选中选中选中选中选中选中选中选中选中选中选中选中选中
-                            </Radio>
-                        </div>
-                        <div style="width: 200px;">
-                            <Radio v-model:selected="temp.radioValue" value="haha">选中选中选中选中选</Radio>
-                        </div>
-                        <div class="wrap">
-                            <Switcher v-model:value="temp.selected"></Switcher>
-                        </div>
-                    </div>
-                </template>
-            </TabPages>
+        <div class="center space">
+            <div class="left border">
+                <Accordion :options="accordionData.options" v-model:value="accordionData.current"></Accordion>
+            </div>
+            <div class="space">
+                <Pview></Pview>
+            </div>
         </div>
-        <div class="options">
-            <DataTable :columns="columns" :data="[]"></DataTable>
-        </div>
+        <div class="foot border frame">&copy; 2024 @cogears</div>
     </div>
 </template>
 <style scoped lang="scss">
-.options {
+.app-page {
     display: flex;
-    margin: 20px;
+    flex-direction: column;
+    height: 100vh;
 
-    .btn {
-        margin-right: 20px;
+    .top {
+        display: flex;
+        align-items: center;
+        height: 2em;
+        border-bottom-width: 1px;
+        padding: 0 var(--size-padding);
     }
-}
 
-.wrap {
-    &+.wrap {
-        margin-left: 20px;
+    .foot {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 2em;
+        border-top-width: 1px;
+    }
+
+    .center {
+        display: flex;
+    }
+
+    .left {
+        width: 200px;
+        border-right-width: 1px;
     }
 }
 </style>
