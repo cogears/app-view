@@ -47,6 +47,10 @@ textarea {
     }
 }
 
+svg {
+    display: block;
+}
+
 .red {
     color: var(--color-red);
 }
@@ -182,5 +186,27 @@ textarea {
     40%,
     60% {
         transform: translate3d(4px, -2px, 0);
+    }
+}
+
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background-clip: content-box;
+}
+
+:hover {
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--color-scroller);
     }
 }

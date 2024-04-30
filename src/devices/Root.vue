@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import Toast from './Toast.vue'
+import AppLoading from './AppLoading.vue';
+import CalendarPopup from './CalendarPopup.vue';
+import ContextMenu from './ContextMenu.vue';
 import MessageBox from './MessageBox.vue';
-import ContextMenu from './ContextMenu.vue'
-import AppLoading from './AppLoading.vue'
+import Toast from './Toast.vue';
 </script>
 <template>
     <MessageBox></MessageBox>
+    <CalendarPopup></CalendarPopup>
     <ContextMenu></ContextMenu>
     <AppLoading></AppLoading>
     <Toast></Toast>

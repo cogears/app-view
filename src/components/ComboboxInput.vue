@@ -36,9 +36,12 @@ async function onShowDropMenu() {
         <span class="space line1 text1">
             <slot><label class="placeholder text3">{{ placeholder }}</label></slot>
         </span>
-        <slot name="suffix">
-            <IconRight class="arrow" :size="14" :direction="temp.dropVisible ? 'up' : 'down'"></IconRight>
-        </slot>
+
+        <div class="arrow">
+            <slot name="suffix">
+                <IconRight :size="14" :direction="temp.dropVisible ? 'up' : 'down'"></IconRight>
+            </slot>
+        </div>
     </a>
 </template>
 <style scoped lang="scss">

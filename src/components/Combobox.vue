@@ -44,8 +44,12 @@ const emits = defineEmits<{
     (e: 'change'): void
 }>()
 
-function onItemSelected(key: string | string[]) {
-    emits('update:value', key)
+function onItemSelected(key: string[]) {
+    if (props.multiple) {
+        emits('update:value', key)
+    } else {
+        emits('update:value', key[0] || '')
+    }
     emits('change')
 }
 
@@ -78,15 +82,13 @@ async function onShowDropMenu(pos: DOMRect) {
     })
     if (result) {
         onItemSelected(result)
+    } else {
+        onItemSelected([])
     }
 }
 
 function onClear() {
-    if (props.multiple) {
-        onItemSelected([])
-    } else {
-        onItemSelected('')
-    }
+    onItemSelected([])
 }
 </script>
 <template>
