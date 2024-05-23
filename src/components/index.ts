@@ -12,6 +12,7 @@ import Scroller from './Scroller.vue'
 import SwitchBar from './SwitchBar.vue'
 import Switcher from './Switcher.vue'
 import TabPages from './TabPages.vue'
+import Uploader from './Uploader.vue'
 
 export * from './icons'
 export {
@@ -28,6 +29,7 @@ export {
     Scroller,
     SwitchBar,
     Switcher,
-    TabPages
+    TabPages,
+    Uploader,
 }
 

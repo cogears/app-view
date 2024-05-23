@@ -1,4 +1,4 @@
-
+import { Component } from 'vue'
 export interface IInput {
     focus(): void
     blur(): void
@@ -57,3 +57,19 @@ export interface ColumnHeader {
     bgClass?: string,
     children?: ColumnHeader[]
 }
+
+export const Accordion: Component
+export const Button: Component
+export const Calendar: Component
+export const Checkbox: Component
+export const Combobox: Component
+export const DataTable: Component
+export const Dialog: Component
+export const Input: Component
+export const Loading: Component
+export const Radio: Component
+export const Scroller: Component
+export const SwitchBar: Component
+export const Switcher: Component
+export const TabPages: Component
+export const Uploader: Component

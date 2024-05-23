@@ -13,6 +13,7 @@ import Scroller from '../../../components/Scroller.vue';
 import SwitchBar from '../../../components/SwitchBar.vue';
 import Switcher from '../../../components/Switcher.vue';
 import TabPages from '../../../components/TabPages.vue';
+import Uploader from '../../../components/Uploader.vue';
 
 const context = inject(ViewContext.NAME) as ViewContext
 const options = [
@@ -68,6 +69,11 @@ function onAlert() {
 
 function onLoading() {
     context.device.loading(true, 'hello world')
+}
+
+const files = ref<any[]>([])
+async function onUpload(file: File) {
+    return URL.createObjectURL(file)
 }
 
 </script>
@@ -155,6 +161,9 @@ function onLoading() {
                         </div>
                         <div class="wrap">
                             <SwitchBar :options="options" v-model:value="temp.comValue"></SwitchBar>
+                        </div>
+                        <div class="wrap">
+                            <Uploader type="image" :value="files" :upload="onUpload"></Uploader>
                         </div>
                     </div>
                 </template>

@@ -35,7 +35,8 @@ export interface DeviceManager {
     calendar(date: Date | undefined, options2: { x: number, y: number, width?: number, multiple?: boolean }, marks?: Date[]): Promise<Date | void>
 }
 
-export interface ViewContext {
+export class ViewContext {
+    static readonly NAME: Symbol
     get query(): any
     get router(): Router
     get device(): DeviceManager
