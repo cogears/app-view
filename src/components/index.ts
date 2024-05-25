@@ -7,6 +7,7 @@ import DataTable from './DataTable.vue'
 import Dialog from './Dialog.vue'
 import Input from './Input.vue'
 import Loading from './Loading.vue'
+import Pagination from './Pagination.vue'
 import Radio from './Radio.vue'
 import Scroller from './Scroller.vue'
 import SwitchBar from './SwitchBar.vue'
@@ -25,11 +26,12 @@ export {
     Dialog,
     Input,
     Loading,
+    Pagination,
     Radio,
     Scroller,
     SwitchBar,
     Switcher,
     TabPages,
-    Uploader,
+    Uploader
 }
 

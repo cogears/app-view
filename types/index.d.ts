@@ -31,7 +31,7 @@ export interface DeviceManager {
     alert(message: string, title?: string, ok?: string): Promise<void>
     confirm(message: string, title?: string, ok?: string, cancel?: string, tip?: string): Promise<boolean>
     prompt(message: string, title?: string, value?: string): Promise<string>
-    contextMenu(options: MenuOption[], options2: { x: number, y: number, width?: number, height?: number, align?: 'left' | 'right', multiple?: boolean }): Promise<string[] | void>
+    contextMenu(options: MenuOption[], options2: { x: number, y: number, width?: number, height?: number, align?: 'left' | 'right', multiple?: boolean }): Promise<any[] | void>
     calendar(date: Date | undefined, options2: { x: number, y: number, width?: number, multiple?: boolean }, marks?: Date[]): Promise<Date | void>
 }
 

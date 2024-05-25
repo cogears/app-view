@@ -67,6 +67,7 @@ export const DataTable: Component
 export const Dialog: Component
 export const Input: Component
 export const Loading: Component
+export const Pagination: Component
 export const Radio: Component
 export const Scroller: Component
 export const SwitchBar: Component

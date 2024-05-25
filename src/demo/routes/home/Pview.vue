@@ -14,6 +14,7 @@ import SwitchBar from '../../../components/SwitchBar.vue';
 import Switcher from '../../../components/Switcher.vue';
 import TabPages from '../../../components/TabPages.vue';
 import Uploader from '../../../components/Uploader.vue';
+import Pagination from '../../../components/Pagination.vue'
 
 const context = inject(ViewContext.NAME) as ViewContext
 const options = [
@@ -188,6 +189,9 @@ async function onUpload(file: File) {
         </div>
         <div class="options">
             <DataTable :columns="columns" :data="[]"></DataTable>
+        </div>
+        <div class="options">
+            <Pagination :page="3" :size="20" :total="100"></Pagination>
         </div>
     </div>
 </template>
