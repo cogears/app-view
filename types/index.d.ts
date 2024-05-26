@@ -61,4 +61,4 @@ export interface RenderOptions {
     theme?: string
 }
 
-export function render(options: RenderOptions): void
+export function render(options: RenderOptions): ViewContext
