@@ -113,7 +113,7 @@ function onKeydown(e: KeyboardEvent) {
     }
 
     &.textarea {
-        padding: var(--size-padding);
+        padding: var(--size-padding) 0;
         height: 10em;
     }
 

@@ -193,6 +193,9 @@ async function onUpload(file: File) {
         <div class="options">
             <Pagination :page="3" :size="20" :total="100"></Pagination>
         </div>
+        <div class="options">
+            <Input :textarea="true"></Input>
+        </div>
     </div>
 </template>
 <style scoped lang="scss">

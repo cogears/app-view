@@ -80,10 +80,8 @@ async function onShowDropMenu(pos: DOMRect) {
         x: pos.left, y: pos.top, width: pos.width, height: pos.height,
         align: 'right', multiple: props.multiple
     })
-    if (result) {
+    if (result && result.length > 0) {
         onItemSelected(result)
-    } else {
-        onItemSelected([])
     }
 }
 
@@ -92,11 +90,9 @@ function onClear() {
 }
 </script>
 <template>
-    <ComboboxInput :disabled="disabled" :readonly="readonly" :frameless="frameless" :placeholder="placeholder"
-        :onDrop="onShowDropMenu">
+    <ComboboxInput :disabled="disabled" :readonly="readonly" :frameless="frameless" :placeholder="placeholder" :onDrop="onShowDropMenu">
         <template v-if="inputMode">
-            <Input v-model:value="temp.inputValue" :placeholder="placeholder" frameless
-                @change="onInputChanged"></Input>
+            <Input v-model:value="temp.inputValue" :placeholder="placeholder" frameless @change="onInputChanged"></Input>
         </template>
         <template v-else>
             <template v-if="selectedItems.length > 0">
