@@ -1,18 +1,18 @@
 <script setup lang="ts">
+import { MenuOption } from 'types';
 import { computed, reactive, ref } from 'vue';
 import Checkbox from './Checkbox.vue';
 import Menu from './Menu.vue';
 import IconRight from './icons/IconRight.vue';
-import { MenuOption } from 'types';
 
 const props = defineProps<{
-    item: MenuOption,
+    item: MenuOption<any>,
     mode?: 'checkbox'
 }>()
 const emits = defineEmits<{
-    (e: 'selected', items: MenuOption[]): void
+    (e: 'selected', items: MenuOption<any>[]): void
 }>()
-function onSelected(items: MenuOption[]) {
+function onSelected(items: MenuOption<any>[]) {
     emits('selected', [props.item, ...items])
 }
 const temp = reactive({

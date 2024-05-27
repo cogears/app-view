@@ -65,7 +65,7 @@ export default class DeviceManager extends EventDispatcher implements IDeviceMan
         })
     }
 
-    contextMenu(options: MenuOption[], options2: { x: number, y: number, width?: number, height?: number, align?: 'left' | 'right', multiple?: boolean }): Promise<string[] | void> {
+    contextMenu(options: MenuOption<any>[], options2: { x: number, y: number, width?: number, height?: number, align?: 'left' | 'right', multiple?: boolean }): Promise<any[] | void> {
         return new Promise(resolve => {
             class ContextMenuTransaction extends Transaction<ViewContext> {
                 get isTick(): boolean {
@@ -81,11 +81,11 @@ export default class DeviceManager extends EventDispatcher implements IDeviceMan
         })
     }
 
-    calendar(date: Date | undefined, options2: { x: number, y: number, width?: number, multiple?: boolean }, marks?: Date[]): Promise<Date | void> {
+    calendar(date: Date | undefined, options2: { x: number, y: number, width?: number, multiple?: boolean }): Promise<Date | void> {
         return new Promise(resolve => {
             class CalendarTransaction extends Transaction<ViewContext> {
                 start() {
-                    return this.context.device.dispatch(CALENDAR, this, date, options2, marks)
+                    return this.context.device.dispatch(CALENDAR, this, date, options2)
                 }
             }
             let transaction = this._context.startup(CalendarTransaction)

@@ -3,14 +3,14 @@ import { MenuOption } from 'types';
 import MenuItem from './MenuItem.vue';
 
 defineProps<{
-    options: MenuOption[],
+    options: MenuOption<any>[],
     mode?: 'checkbox',
 }>()
 const emits = defineEmits<{
-    (e: 'selected', items: MenuOption[]): void
+    (e: 'selected', items: MenuOption<any>[]): void
 }>()
 
-function onSelected(items: MenuOption[]) {
+function onSelected(items: MenuOption<any>[]) {
     emits('selected', items)
 }
 

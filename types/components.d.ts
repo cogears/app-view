@@ -1,4 +1,7 @@
-import { Component } from 'vue'
+import { Component, DefineComponent, Prop, PropType } from 'vue'
+export interface IDataTable {
+    clearSelected(): void
+}
 export interface IInput {
     focus(): void
     blur(): void
@@ -18,18 +21,16 @@ export interface ScrollEvent {
     percentY: number,
 }
 
-export interface Option {
-    key: any,
+export interface Option<T> {
+    key: T,
     label: string,
-    [index: string]: any
 }
 
-export interface MenuOption extends Option {
+export interface MenuOption<T> extends Option<T> {
     selected?: boolean,
     disabled?: boolean,
     children?: MenuOption[]
 }
-
 
 export interface Column {
     label: string,
@@ -58,19 +59,196 @@ export interface ColumnHeader {
     children?: ColumnHeader[]
 }
 
-export const Accordion: Component
-export const Button: Component
-export const Calendar: Component
-export const Checkbox: Component
-export const Combobox: Component
-export const DataTable: Component
-export const Dialog: Component
-export const Input: Component
-export const Loading: Component
-export const Pagination: Component
-export const Radio: Component
-export const Scroller: Component
-export const SwitchBar: Component
-export const Switcher: Component
-export const TabPages: Component
-export const Uploader: Component
+export interface FileItem {
+    name: string, url: string, width: number, height: number, duration: number, size: number
+}
+
+export type Color = 'blue' | 'red' | 'green' | 'orange' | 'yellow' | 'purple' | 'magenta' | 'cyan' | 'gray'
+
+export const Accordion: DefineComponent<{
+    options: Option<T>[]
+    value: T
+}, {}, {}, {}, {}, {}, {}, {
+    'update:value': (value: T) => void
+    change: () => void
+}>
+
+export const Button: DefineComponent<{
+    color?: Color
+    theme?: 'normal' | 'line'
+    round?: boolean,
+    on?: boolean,
+    readonly?: boolean,
+    disabled?: boolean,
+    loading?: boolean,
+}, {}, {}, {}, {}, {}, {}, {
+    click: (e: MouseEvent) => void;
+}>
+
+export const Calendar: DefineComponent<{
+    value?: Date,
+    format?: string,
+    placeholder?: string,
+    readonly?: boolean,
+    disabled?: boolean,
+    frameless?: boolean,
+}, {}, {}, {}, {}, {}, {}, {
+    'update:value': (value: Date) => void
+    change: () => void
+}>
+
+export const Checkbox: DefineComponent<{
+    value?: any,
+    selected: Array<any> | boolean,
+    disabled?: boolean,
+    readonly?: boolean,
+}, {}, {}, {}, {}, {}, {}, {
+    'update:selected': (value: any) => void
+    change: () => void
+}>
+
+export const Combobox: DefineComponent<{
+    options: MenuOption<any>[],
+    value: any | any[],
+    placeholder?: string,
+    disabled?: boolean,
+    readonly?: boolean,
+    frameless?: boolean,
+    multiple?: boolean,
+    inputMode?: boolean,
+    clearVisible?: boolean,
+}, {}, {}, {}, {}, {}, {}, {
+    'update:value': (value: any | any[]) => void
+    change: () => void
+}>
+
+export const DataTable: DefineComponent<{
+    data: any[],
+    columns: Column[],
+    headers?: ColumnHeader[],
+    border?: boolean,
+    full?: boolean,
+    big?: boolean,
+    serial?: boolean,
+    loading?: boolean,
+    selectable?: boolean,
+    defaultSelectedIndex?: number,
+    drag?: boolean,
+    sort?: boolean,
+    sortHandler?: (list: any[], c: Column) => void,
+}, {}, {}, {}, {}, {}, {}, {
+    resize: (data: { width: number, height: number, pageSize: number }) => void
+    scroll: (data: { y: number, height: number, percent: number }) => void
+    load: (data: any[]) => void
+    sort: (c: Column) => void
+    selected: (item: any) => void
+    execute: (item: any) => void
+    contextmenu: (data: { evt: MouseEvent, item: any, index: number }) => void
+    drag: (data: { source: number, target: number }) => void
+}>
+
+export const Dialog: DefineComponent<{
+    width: number,
+    height: number,
+    top?: number,
+    right?: number,
+    bottom?: number,
+    left?: number,
+    title?: string,
+    modal?: boolean,
+    visible: boolean,
+    loading?: boolean,
+    keyboardIgnore?: boolean,
+    shouldClose?: () => boolean,
+}, {}, {}, {}, {}, {}, {}, {
+    'update:visible': (value: boolean) => void
+    close: () => void
+}>
+
+export const Input: DefineComponent<{
+    value?: string,
+    placeholder?: string,
+    round?: boolean,
+    textarea?: boolean,
+    password?: boolean,
+    maxlength?: number,
+    maxTip?: boolean,
+    disabled?: boolean,
+    readonly?: boolean,
+}, {}, {}, {}, {}, {}, {}, {
+    focus: () => void
+    blur: () => void
+    keydown: (evt: KeyboardEvent) => void
+    'update:value': (value: string) => void
+    change: () => void
+}>
+
+export const Loading: DefineComponent<{
+    tip?: string,
+    visible?: boolean,
+    fixed?: boolean,
+}>
+
+export const Pagination: DefineComponent<{
+    total: number;
+    size: number;
+    page?: number;
+}, {}, {}, {}, {}, {}, {}, {
+    'update:page': (value: number) => void
+    change: () => void
+}>
+
+export const Radio: DefineComponent<{
+    value?: any,
+    selected?: any,
+    disabled?: boolean,
+    readonly?: boolean,
+}, {}, {}, {}, {}, {}, {}, {
+    'update:selected': (value: any) => void
+    change: () => void
+}>
+
+export const Scroller: DefineComponent<{
+    scrollX?: boolean,
+    border?: boolean,
+}, {}, {}, {}, {}, {}, {}, {
+    scroll: (data: ScrollEvent) => void
+}>
+
+export const SwitchBar: DefineComponent<{
+    options: Option<any>[],
+    value?: any,
+}, {}, {}, {}, {}, {}, {}, {
+    'update:value': (value: any) => void
+    change: () => void
+}>
+
+export const Switcher: DefineComponent<{
+    value: boolean,
+    readonly?: boolean,
+    disabled?: boolean,
+}, {}, {}, {}, {}, {}, {}, {
+    'update:value': (value: boolean) => void
+    change: () => void
+}>
+
+export const TabPages: DefineComponent<{
+    options: Option<any>[],
+    value: any,
+    border?: boolean,
+    full?: boolean,
+    readonly?: boolean,
+}, {}, {}, {}, {}, {}, {}, {
+    'update:value': (value: any) => void
+    change: () => void
+}>
+
+export const Uploader: DefineComponent<{
+    type: 'image' | 'audio' | 'video' | '',
+    accept?: string,
+    value: FileItem[],
+    limit?: number,
+    upload: (file: File) => Promise<string>,
+}, {}, {}, {}, {}, {}, {}, {
+    change: () => void
+}>

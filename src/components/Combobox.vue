@@ -3,11 +3,12 @@ import { MenuOption } from 'types';
 import { computed, inject, reactive } from 'vue';
 import ViewContext from '../ViewContext';
 import ComboboxInput from './ComboboxInput.vue';
+import IconClose from './icons/IconClose.vue';
 import Input from './Input.vue';
 const context = inject(ViewContext.NAME) as ViewContext
 const props = withDefaults(defineProps<{
-    options: MenuOption[],
-    value?: any | any[],
+    options: MenuOption<any>[],
+    value: any | any[],
     placeholder?: string,
     disabled?: boolean,
     readonly?: boolean,
@@ -17,7 +18,6 @@ const props = withDefaults(defineProps<{
     clearVisible?: boolean,
 }>(), {
     placeholder: '请选择...',
-    value: '',
     disabled: false,
     readonly: false,
     frameless: false,
@@ -40,11 +40,11 @@ const temp = reactive({
     inputValue: ''
 })
 const emits = defineEmits<{
-    (e: "update:value", value: string | string[]): void
+    (e: "update:value", value: any | any[]): void
     (e: 'change'): void
 }>()
 
-function onItemSelected(key: string[]) {
+function onItemSelected(key: any[]) {
     if (props.multiple) {
         emits('update:value', key)
     } else {
@@ -104,9 +104,11 @@ function onClear() {
                     <span class="text1 line1" v-if="multiple">{{ selectedItems.map(item => item.label).join(',')
                         }}</span>
                     <span class="text1 line1" v-else>{{ selectedItems[0].label }}</span>
-                    <a class="icon i-guanbi" @click.stop="onClear" v-if="clearVisible"></a>
                 </div>
             </template>
+        </template>
+        <template #suffix>
+            <IconClose :size="14" @click.stop="onClear" v-if="clearVisible && selectedItems.length > 0"></IconClose>
         </template>
     </ComboboxInput>
 </template>

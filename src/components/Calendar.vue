@@ -8,16 +8,15 @@ const context = inject(ViewContext.NAME) as ViewContext
 const props = withDefaults(defineProps<{
     value?: Date,
     format?: string,
+    placeholder?: string,
     readonly?: boolean,
     disabled?: boolean,
     frameless?: boolean,
-    placeholder?: string,
-    marks?: Date[],
 }>(), {
+    placeholder: '请选择...',
     readonly: false,
     disabled: false,
     frameless: false,
-    placeholder: '请选择...'
 })
 const temp = reactive({
     focus: false,
@@ -30,7 +29,7 @@ const emits = defineEmits<{
 async function onShowCalendar(rect: DOMRect) {
     temp.focus = true;
     try {
-        let target = await context.device.calendar(props.value, rect, props.marks)
+        let target = await context.device.calendar(props.value, rect)
         if (target) {
             emits("update:value", target);
             emits("change");

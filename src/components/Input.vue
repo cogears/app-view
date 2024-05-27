@@ -5,7 +5,7 @@ import ViewContext from '../ViewContext';
 
 const context = inject(ViewContext.NAME) as ViewContext
 const props = withDefaults(defineProps<{
-    value?: string | number,
+    value?: string,
     placeholder?: string,
     round?: boolean,
     textarea?: boolean,
@@ -29,13 +29,13 @@ const emits = defineEmits<{
     (e: 'focus'): void;
     (e: 'blur'): void;
     (e: 'keydown', evt: KeyboardEvent): void;
-    (e: 'update:value', value: string | number): void;
+    (e: 'update:value', value: string): void;
     (e: 'change'): void
 }>()
 const input = ref<HTMLInputElement>()
 const temp = reactive({
     focus: false,
-    content: '' as string | number,
+    content: '',
 })
 defineExpose<IInput>({
     focus() {

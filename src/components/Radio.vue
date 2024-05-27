@@ -3,7 +3,7 @@ import { computed, withDefaults } from 'vue';
 
 const props = withDefaults(defineProps<{
     value?: any,
-    selected?: any,
+    selected: any,
     disabled?: boolean,
     readonly?: boolean,
 }>(), {

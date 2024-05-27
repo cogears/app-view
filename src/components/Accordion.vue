@@ -1,32 +1,27 @@
 <script setup lang="ts">
-import { computed } from "vue";
 import { Option } from "types";
-const props = defineProps<{
-    options: Option[],
-    value: string,
+defineProps<{
+    options: Option<any>[],
+    value: any,
 }>()
-
-const current = computed({
-    get() {
-        return props.value
-    },
-    set(value: string) {
-        emits('update:value', value)
-    }
-})
 
 const emits = defineEmits<{
-    (e: 'update:value', value: string): void
+    (e: 'update:value', value: any): void
     (e: 'change'): void
 }>()
+
+function onChanged(value: any) {
+    emits('update:value', value)
+    emits('change')
+}
 
 </script>
 <template>
     <div class="com-accordion">
-        <div class="item border" :class="{ on: current == item.key }" v-for="item in options">
-            <a class="item-label frame" @click="current = item.key">{{ item.label }}</a>
+        <div class="item border" :class="{ on: value == item.key }" v-for="item in options">
+            <a class="item-label frame" @click="onChanged(item.key)">{{ item.label }}</a>
             <Transition>
-                <div class="item-container panel border" v-if="current == item.key">
+                <div class="item-container panel border" v-if="value == item.key">
                     <slot :name="'item-' + item.key"></slot>
                 </div>
             </Transition>

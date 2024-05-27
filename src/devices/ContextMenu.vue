@@ -16,7 +16,7 @@ const temp = reactive({
     selected: [] as any[],
     multiple: false,
 })
-const data = ref<MenuOption[]>([])
+const data = ref<MenuOption<any>[]>([])
 const style = computed(() => {
     let result: any = { top: temp.y + 'px', 'min-width': temp.width + 'px' }
     if (temp.align == 'left') {
@@ -35,7 +35,7 @@ onMounted(() => {
     context.device.addEventListener(CONTEXT_MENU, onShow)
 })
 
-function onShow(_: string, transaction: Transaction<any>, options: MenuOption[], pos: { x: number, y: number, width: number, height: number, align: string, multiple: boolean }) {
+function onShow(_: string, transaction: Transaction<any>, options: MenuOption<any>[], pos: { x: number, y: number, width: number, height: number, align: string, multiple: boolean }) {
     if (dialogTransaction) {
         dialogTransaction.abort()
     }
@@ -59,7 +59,7 @@ function onShow(_: string, transaction: Transaction<any>, options: MenuOption[],
     }
 }
 
-function onSelected(items: MenuOption[]) {
+function onSelected(items: MenuOption<any>[]) {
     if (temp.multiple) {
         let selected = items[items.length - 1].selected
         for (let item of items) {

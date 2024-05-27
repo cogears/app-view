@@ -4,7 +4,7 @@ import Loading from './Loading.vue';
 
 const props = withDefaults(defineProps<{
     color?: string,
-    theme?: '' | 'normal' | 'line',
+    theme?: 'normal' | 'line',
     round?: boolean,
     on?: boolean,
     readonly?: boolean,

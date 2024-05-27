@@ -19,7 +19,6 @@ const temp = reactive({
 })
 const origin = ref<Date>()
 const current = ref<Date>()
-const markDates = ref<Date[]>([])
 const style = computed(() => ({ left: temp.x + 'px', top: temp.y + 'px' }))
 const WIDTH = 350
 const HEIGHT = 360
@@ -29,11 +28,10 @@ onMounted(() => {
     context.device.addEventListener(CALENDAR, onShow)
 })
 
-function onShow(_: string, transaction: Transaction<any>, date: Date | undefined, pos: { x: number, y: number, width: number, height: number }, marks?: Date[]) {
+function onShow(_: string, transaction: Transaction<any>, date: Date | undefined, pos: { x: number, y: number, width: number, height: number }) {
     dialogTransaction = transaction
     origin.value = date
     current.value = date
-    markDates.value = marks || []
     temp.today = new Date()
     temp.x = pos.x
     temp.y = pos.y + pos.height
@@ -95,15 +93,16 @@ function onSelected(date: number) {
     onClose()
 }
 
+function onSetToday() {
+    current.value = new Date()
+    update()
+}
+
 function isToday(date: number) {
     return temp.today.getFullYear() == temp.year && temp.today.getMonth() == temp.month && temp.today.getDate() == date;
 }
 function isDay(date: number) {
     return current.value && current.value.getFullYear() == temp.year && current.value.getMonth() == temp.month && current.value.getDate() == date;
-}
-
-function isMark(date: number) {
-    return markDates.value && markDates.value.some(mk => mk.getFullYear() == temp.year && mk.getMonth() == temp.month && mk.getDate() == date)
 }
 
 function update() {
@@ -119,6 +118,7 @@ function update() {
     temp.year = dt.getFullYear();
     temp.month = dt.getMonth();
 }
+
 
 </script>
 <template>
@@ -151,13 +151,13 @@ function update() {
             <div class="days">
                 <span v-for="n in temp.week" :key="'p' + n"></span>
                 <span v-for="n in temp.days" :key="n">
-                    <a :class="{ selected: isDay(n), today: isToday(n), mark: isMark(n) }" @click="onSelected(n)">
+                    <a :class="{ selected: isDay(n), today: isToday(n) }" @click="onSelected(n)">
                         {{ formatter.n2(n) }}
                     </a>
                 </span>
             </div>
             <div class="bottom border">
-                <i></i>
+                <i @click="onSetToday"></i>
                 <label>今天: {{ formatter.date(temp.today.getTime()) }}</label>
             </div>
         </div>

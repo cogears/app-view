@@ -2,7 +2,7 @@
 import { Option } from 'types';
 
 withDefaults(defineProps<{
-    options: Option[],
+    options: Option<any>[],
     value: any,
     border?: boolean,
     full?: boolean,
@@ -13,12 +13,12 @@ withDefaults(defineProps<{
 })
 const emits = defineEmits<{
     (e: 'update:value', value: any): void
-    (e: 'change', item: Option): void
+    (e: 'change'): void
 }>()
 
-function onSelected(item: Option) {
+function onSelected(item: Option<any>) {
     emits('update:value', item.key)
-    emits('change', item)
+    emits('change')
 }
 </script>
 <template>

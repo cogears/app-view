@@ -155,7 +155,7 @@ async function onUpload(file: File) {
                             <Input placeholder="请输入内容..." />
                         </div>
                         <div class="wrap">
-                            <Combobox :options="options" v-model:value="temp.comValue" style="width: 100px"></Combobox>
+                            <Combobox :options="options" v-model:value="temp.comValue" style="width: 100px" :clear-visible="false"></Combobox>
                         </div>
                         <div class="wrap">
                             <Calendar v-model:value="temp.date"></Calendar>

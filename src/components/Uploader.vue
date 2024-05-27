@@ -36,6 +36,7 @@ const input = ref<HTMLInputElement>()
 const tasks = ref<Task[]>([])
 
 const emits = defineEmits<{
+    (e: 'change'): void
 }>()
 
 function onChange() {
@@ -54,6 +55,7 @@ function onChange() {
 }
 function onRemove(i: number) {
     props.value.splice(i, 1)
+    emits('change')
 }
 
 function onRemoveTask(i: number) {
@@ -79,6 +81,7 @@ class Task {
     async startUpload(file: File) {
         let url = await props.upload(file)
         props.value.push({ url, name: this.name, width: this.width, height: this.height, size: this.size, duration: this.duration })
+        emits('change')
         if (tasks.value) {
             let i = tasks.value.indexOf(this)
             if (i >= 0) {

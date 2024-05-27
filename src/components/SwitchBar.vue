@@ -3,8 +3,8 @@ import { Option } from 'types';
 import { reactive, ref, watchEffect } from 'vue';
 
 const props = defineProps<{
-    options: Option[],
-    value?: string,
+    options: Option<any>[],
+    value?: any,
 }>()
 
 const texts = ref<HTMLDivElement>()
@@ -34,7 +34,7 @@ const emits = defineEmits<{
     (e: 'change'): void
 }>()
 
-function onSelected(item: Option) {
+function onSelected(item: Option<any>) {
     emits('update:value', item.key)
     emits('change')
 }
