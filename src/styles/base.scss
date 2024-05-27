@@ -126,6 +126,12 @@ svg {
     overflow: hidden;
 }
 
+.line1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .popup {
     position: absolute;
     background-color: var(--color-panel);
