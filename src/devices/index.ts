@@ -65,7 +65,7 @@ export default class DeviceManager extends EventDispatcher implements IDeviceMan
         })
     }
 
-    contextMenu(options: MenuOption<any>[], options2: { x: number, y: number, width?: number, height?: number, align?: 'left' | 'right', multiple?: boolean }): Promise<any[] | void> {
+    contextMenu<T>(options: MenuOption<T>[], options2: { x: number, y: number, width?: number, height?: number, align?: 'left' | 'right', multiple?: boolean }): Promise<T[] | void> {
         return new Promise(resolve => {
             class ContextMenuTransaction extends Transaction<ViewContext> {
                 get isTick(): boolean {

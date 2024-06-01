@@ -27,6 +27,11 @@ function onSelected(items: MenuOption<any>[]) {
 <style scoped lang="scss">
 .menu {
     padding: 4px 0;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 
     .separate {
         margin: 4px 8px;

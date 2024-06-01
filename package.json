@@ -1,6 +1,6 @@
 {
     "name": "@cogears/app-view",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "application service",
     "type": "module",
     "main": "dist/app-view.js",
