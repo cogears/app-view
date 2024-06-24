@@ -1,7 +1,6 @@
 import { Router } from "vue-router";
 import EventDispatcher from "./common/EventDispatcher";
 import keyboard, { KeyboardUtil } from "./common/keyboard";
-import { fetchValue } from './components/options';
 import DeviceManager from "./devices";
 
 export default class ViewContext extends EventDispatcher {
@@ -33,15 +32,16 @@ export default class ViewContext extends EventDispatcher {
         return query
     }
 
-    fetchValue(data: any, key: string) {
-        return fetchValue(data, key)
-    }
-
-    startup<T extends Transaction<any>>(transactionClass: Class<T>): T {
+    async startup<T extends Transaction<any>>(transactionClass: Class<T>): Promise<T> {
         let transaction = new transactionClass(this)
         let key = transaction.toString()
-        if (this._transactions.some(item => item.toString() == key)) {
-            throw new Error('有相同事务未完成:' + key)
+        let old = this._transactions.find(item => item.toString() == key)
+        if (old) {
+            if (await old.shouldAbort()) {
+                old.abort()
+            } else {
+                throw new Error('有相同事务未完成:' + key)
+            }
         }
         this._transactions.push(transaction)
         console.debug('start', transaction.toString())

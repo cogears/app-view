@@ -1,15 +1,5 @@
 import { Column } from 'types'
-
-export function fetchValue(data: any, key: string) {
-    let keys = key.split('.');
-    for (let k of keys) {
-        data = data[k];
-        if (data == undefined || data == null) {
-            break
-        }
-    }
-    return data;
-}
+import { fetchValue } from '@/common/dataUtil'
 export function sort(list: any[], column: Column) {
     list.sort((item0, item1) => {
         let v0 = fetchValue(item0, column.key);

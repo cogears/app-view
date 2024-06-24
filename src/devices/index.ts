@@ -27,46 +27,46 @@ export default class DeviceManager extends EventDispatcher implements IDeviceMan
     }
 
     alert(message: string, title?: string, ok?: string): Promise<void> {
-        return new Promise(resolve => {
+        return new Promise(async resolve => {
             class AlertTransaction extends Transaction<ViewContext> {
                 start() {
                     return this.context.device.dispatch(ALERT, this, message, title, ok)
                 }
             }
-            let transaction = this._context.startup(AlertTransaction)
+            let transaction = await this._context.startup(AlertTransaction)
             transaction.addEventListener(Transaction.COMMIT, () => resolve())
             transaction.addEventListener(Transaction.ABORT, () => resolve())
         })
     }
 
     confirm(message: string, title?: string, ok?: string, cancel?: string, tip?: string): Promise<boolean> {
-        return new Promise(resolve => {
+        return new Promise(async resolve => {
             class ConfirmTransaction extends Transaction<ViewContext> {
                 start() {
                     return this.context.device.dispatch(CONFIRM, this, message, title, ok, cancel, tip)
                 }
             }
-            let transaction = this._context.startup(ConfirmTransaction)
+            let transaction = await this._context.startup(ConfirmTransaction)
             transaction.addEventListener(Transaction.COMMIT, () => resolve(true))
             transaction.addEventListener(Transaction.ABORT, () => resolve(false))
         })
     }
 
     prompt(message: string, title?: string, value?: string): Promise<string> {
-        return new Promise(resolve => {
+        return new Promise(async resolve => {
             class PromptTransaction extends Transaction<ViewContext> {
                 start() {
                     return this.context.device.dispatch(PROMPT, this, message, title, value)
                 }
             }
-            let transaction = this._context.startup(PromptTransaction)
+            let transaction = await this._context.startup(PromptTransaction)
             transaction.addEventListener(Transaction.COMMIT, (_, value: string) => resolve(value))
             transaction.addEventListener(Transaction.ABORT, () => resolve(''))
         })
     }
 
     contextMenu<T>(options: MenuOption<T>[], options2: { x: number, y: number, width?: number, height?: number, align?: 'left' | 'right', multiple?: boolean }): Promise<T[] | void> {
-        return new Promise(resolve => {
+        return new Promise(async resolve => {
             class ContextMenuTransaction extends Transaction<ViewContext> {
                 get isTick(): boolean {
                     return true
@@ -75,20 +75,20 @@ export default class DeviceManager extends EventDispatcher implements IDeviceMan
                     return this.context.device.dispatch(CONTEXT_MENU, this, options, options2)
                 }
             }
-            let transaction = this._context.startup(ContextMenuTransaction)
+            let transaction = await this._context.startup(ContextMenuTransaction)
             transaction.addEventListener(Transaction.COMMIT, (_, result: any) => resolve(result))
             transaction.addEventListener(Transaction.ABORT, () => resolve())
         })
     }
 
     calendar(date: Date | undefined, options2: { x: number, y: number, width?: number, multiple?: boolean }): Promise<Date | void> {
-        return new Promise(resolve => {
+        return new Promise(async resolve => {
             class CalendarTransaction extends Transaction<ViewContext> {
                 start() {
                     return this.context.device.dispatch(CALENDAR, this, date, options2)
                 }
             }
-            let transaction = this._context.startup(CalendarTransaction)
+            let transaction = await this._context.startup(CalendarTransaction)
             transaction.addEventListener(Transaction.COMMIT, (_, result: any) => resolve(result))
             transaction.addEventListener(Transaction.ABORT, () => resolve())
         })

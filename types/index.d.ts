@@ -1,6 +1,7 @@
 import { Router } from "vue-router";
 export * from './common';
 export * from './components';
+export * from './renders';
 
 export interface EventListener {
     (event: string, ...args: Array<any>): void;
@@ -42,7 +43,6 @@ export class ViewContext {
     get device(): DeviceManager
     get keyboard(): KeyboardManager
     parseQuery(search: string): Record<string, string>
-    fetchValue(data: any, key: string): any
     startup<T extends Transaction<any>>(transactionClass: Class<T>): T
     complete(transaction: Transaction<any>): void
 }

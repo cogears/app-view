@@ -22,6 +22,10 @@ export function packTask(task: Function, delay: number = 0): TaskFunction
 // 包装异步数据加载任务
 export function executeLoadTask<T>(loadTask: () => Promise<T>): PromiseTask<T>
 
+// 提取数据
+export function fetchValue(data: any, key: string): any
+// 复制数据
+export function copyValue(source: any): any
 
 export interface Formatter {
     n2(value: number): string

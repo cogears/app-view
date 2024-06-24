@@ -2,7 +2,7 @@
 import { Column } from 'types';
 import { computed } from 'vue';
 import formatter from '../common/formatter';
-import { fetchValue } from './options';
+import { fetchValue } from '@/common/dataUtil'
 const props = defineProps<{
     item: any,
     column: Column
