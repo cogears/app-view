@@ -1,4 +1,4 @@
-import routes from "./routes";
-import { render } from '../index';
+import { app } from './app'
+import { startup } from '@/renders'
 
-render({ routes })
+startup(app)
