@@ -132,6 +132,10 @@ svg {
     white-space: nowrap;
 }
 
+.shadow {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
 .popup {
     position: absolute;
     background-color: var(--color-panel);

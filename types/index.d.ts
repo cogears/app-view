@@ -58,7 +58,8 @@ export class Transaction<T extends ViewContext> extends EventDispatcher {
 
 export interface RenderOptions {
     routes: RouteRecordRaw[],
-    theme?: string
+    theme?: string,
+    contextBuilder?: (router: Router) => ViewContext,
 }
 
 export function render(options: RenderOptions): ViewContext
