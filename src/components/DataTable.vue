@@ -534,7 +534,7 @@ function onMouseDownScrollbar() {
                                 </slot>
                             </DataTableItem>
                         </div>
-                        <div class="fill-blank" :style="{ width: temp.contentWidth + 'px' }"></div>
+                        <div class="fill-blank" :style="{ width: temp.contentWidth + 'px' }" v-if="temp.dataSource.length == 0"></div>
                     </div>
                     <div class="suffixed" :class="{ shadowX2: suffixShadowX }" v-if="suffixedColumns.length">
                         <div class="columns" v-for="(item, i) in temp.dataSource" :class="columnClass(i + temp.pageOffsetIndex)" @mouseover="onMouseOver(i + temp.pageOffsetIndex)" @mouseout="onMouseOut(i + temp.pageOffsetIndex)" @mousedown="onMouseDown($event, i + temp.pageOffsetIndex)" @click="onClick(i + temp.pageOffsetIndex, $event)" @dblclick="onExecute0" @contextmenu="onContextMenu0(i + temp.pageOffsetIndex, $event)">

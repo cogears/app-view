@@ -61,9 +61,9 @@ const temp = reactive({
 })
 
 const columns = ref<Column[]>([
-    { key: 'key', label: 'f1', width: 1000 },
+    { key: 'key', label: 'f1', width: 100, fixed: true },
     { key: 'label', label: 'f2', width: 1000 },
-    { key: 'p3', label: 'f3', width: 100 },
+    { key: 'p3', label: 'f3', width: 100, suffix: true },
 ])
 
 const tdata = ref<any[]>([
