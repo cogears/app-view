@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { fetchValue, setupValue } from '@/common';
+import IconSearch from '@/components/icons/IconSearch.vue';
 import Input from '@/components/Input.vue';
 import { ActionEvent, InputOptions } from 'types';
 import { computed } from 'vue';
@@ -47,11 +48,23 @@ async function onChanged() {
         }
     }
 }
+
+async function onEnter() {
+    if (props.options.onEnter) {
+        for (let action of props.options.onEnter) {
+            await new Promise((resolve, reject) => {
+                emits('action', { action, resolve, reject })
+            })
+        }
+    }
+}
 </script>
 <template>
-    <Input v-model:value="value" :placeholder="options.placeholder" :textarea="options.textarea" :disabled="disabled"
-        :maxlength="options.maxlength" :maxTip="!!(options.maxlength && options.maxlength > 0)" @blur="onBlur"
-        @change="onChanged"></Input>
+    <Input v-model:value="value" :placeholder="options.placeholder" :textarea="options.textarea" :disabled="disabled" :maxlength="options.maxlength" :maxTip="!!(options.maxlength && options.maxlength > 0)" @blur="onBlur" @change="onChanged" @keydown.enter="onEnter">
+    <template #suffix-icon v-if="options.type == 'search'">
+        <IconSearch class="search" @click="onEnter" />
+    </template>
+    </Input>
 </template>
 <style scoped lang="scss">
 .input {
@@ -59,6 +72,15 @@ async function onChanged() {
 
     &.textarea {
         height: 100%;
+    }
+}
+
+.search {
+    cursor: pointer;
+    fill: var(--color-text2);
+
+    &:hover {
+        fill: var(--color-text1);
     }
 }
 </style>

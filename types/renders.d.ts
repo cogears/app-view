@@ -191,12 +191,13 @@ export interface ButtonOptions {
 
 export interface InputOptions {
     name: string,
-    type?: 'text' | 'number',
+    type?: 'text' | 'number' | 'search',
     textarea?: boolean,
     placeholder?: string,
     maxlength?: number,
     disabled?: string,
     onChanged?: Action[],
+    onEnter?: Action[],
 }
 
 export interface HtmlEditorOptions {

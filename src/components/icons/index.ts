@@ -4,6 +4,7 @@ import IconLoading from "./IconLoading.vue";
 import IconNext from "./IconNext.vue";
 import IconNext2 from "./IconNext2.vue";
 import IconRight from "./IconRight.vue";
+import IconSearch from "./IconSearch.vue";
 
 export {
     IconCalendar,
@@ -12,5 +13,6 @@ export {
     IconNext,
     IconNext2,
     IconRight,
+    IconSearch,
 };
 

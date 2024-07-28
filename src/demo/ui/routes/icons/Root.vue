@@ -1,37 +1,19 @@
 <script setup lang="ts">
-import IconCalendar from '@/components/icons/IconCalendar.vue';
-import IconClose from '@/components/icons/IconClose.vue';
-import IconLoading from '@/components/icons/IconLoading.vue';
-import IconNext from '@/components/icons/IconNext.vue';
-import IconNext2 from '@/components/icons/IconNext2.vue';
-import IconRight from '@/components/icons/IconRight.vue';
+import * as icons from '@/components/icons';
+import { computed } from 'vue';
+
+const keys = computed(() => Object.keys(icons))
+function getIcon(key: string) {
+    //@ts-ignore
+    return icons[key]
+}
 
 </script>
 <template>
     <div class="icons">
-        <div>
-            <IconCalendar />
-            <label>Calendar</label>
-        </div>
-        <div>
-            <IconClose />
-            <label>Close</label>
-        </div>
-        <div>
-            <IconLoading />
-            <label>Loading</label>
-        </div>
-        <div>
-            <IconNext />
-            <label>Next</label>
-        </div>
-        <div>
-            <IconNext2 />
-            <label>Next2</label>
-        </div>
-        <div>
-            <IconRight />
-            <label>Right</label>
+        <div v-for="key in keys">
+            <component :is="getIcon(key)"></component>
+            <label>{{ key.substring(4) }}</label>
         </div>
     </div>
 </template>

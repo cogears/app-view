@@ -16,6 +16,7 @@ import TabPages from '@/components/TabPages.vue';
 import Uploader from '@/components/Uploader.vue';
 import Pagination from '@/components/Pagination.vue'
 import Link from '@/components/Link.vue'
+import IconSearch from '@/components/icons/IconSearch.vue'
 
 const context = inject(ViewContext.NAME) as ViewContext
 const options = [
@@ -160,7 +161,11 @@ async function onUpload(file: File) {
                 <template #p1>
                     <div class="options">
                         <div class="wrap">
-                            <Input placeholder="请输入内容..." />
+                            <Input placeholder="请输入内容...">
+                            <template #suffix-icon>
+                                <IconSearch />
+                            </template>
+                            </Input>
                         </div>
                         <div class="wrap">
                             <Combobox :options="options" v-model:value="temp.comValue" style="width: 100px" :clear-visible="true"></Combobox>
