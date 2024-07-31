@@ -46,9 +46,9 @@ export interface Column {
     align?: 'left' | 'center' | 'right',
     bold?: boolean,
     sort?: 'asc' | 'desc' | 'none',
+    setting?: boolean,
     orderBy?: string,
     bgClass?: string,
-    __attachment?: any,
 }
 
 export interface ColumnHeader {
@@ -141,6 +141,7 @@ export const DataTable: DefineComponent<{
     scroll: (data: { y: number, height: number, percent: number }) => void
     load: (data: any[]) => void
     sort: (c: Column) => void
+    setting: (c: Column) => void
     selected: (item: any) => void
     execute: (item: any) => void
     contextmenu: (data: { evt: MouseEvent, item: any, index: number }) => void

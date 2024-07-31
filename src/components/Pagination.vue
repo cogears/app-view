@@ -71,7 +71,7 @@ function goTo(page: number) {
         margin: 0 5px;
         padding: 0 5px;
         height: 20px;
-        line-height: 20px;
+        line-height: 18px;
         border-radius: 2px;
         border-width: 1px;
         text-align: center;

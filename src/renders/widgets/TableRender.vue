@@ -126,7 +126,16 @@ export default defineComponent({
                 }
             }
         }
-
+        function onSelectAll() {
+            temp.selectAll = !temp.selectAll
+            selected.value.splice(0, selected.value.length)
+            if (temp.selectAll) {
+                let limit = props.options.selectLimit || 999
+                for (let i = 0; i < limit && i < tableData.value.length; i++) {
+                    selected.value.push(tableData.value[i].id)
+                }
+            }
+        }
         function onAction({ action, resolve, reject }: ActionEvent, item: any) {
             if (action.name == ACTION_DELETE_TABLE_ROW) {
                 let i = source.value.indexOf(item)
@@ -141,16 +150,13 @@ export default defineComponent({
             ctx.emit('action', { action, resolve, reject })
         }
 
-        function onSelectAll() {
-            temp.selectAll = !temp.selectAll
-            selected.value.splice(0, selected.value.length)
-            if (temp.selectAll) {
-                let limit = props.options.selectLimit || 999
-                for (let i = 0; i < limit && i < tableData.value.length; i++) {
-                    selected.value.push(tableData.value[i].id)
-                }
+        function onSetting(c: Column) {
+            let field = props.options.fields.find(item => item.key == c.key)
+            if (field) {
+
             }
         }
+
         const slots: any = {
             'td-__select': ({ item }: any) => h(Checkbox, { value: item.id, selected: selected.value, readonly: true, style: { 'align-items': 'center', height: '100%' } })
         }
@@ -175,6 +181,7 @@ export default defineComponent({
                 serial: props.options.serial,
                 selectable: true,
                 onSelected: onSelected,
+                onSetting: onSetting,
             }, slots)
         }
     },

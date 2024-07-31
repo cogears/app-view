@@ -6,6 +6,7 @@ export default {
 <script setup lang="ts">
 import { Column, ColumnHeader } from 'types';
 import { computed } from 'vue';
+import IconSetting from './icons/IconSetting.vue'
 
 const props = defineProps<{
     head: ColumnHeader,
@@ -48,11 +49,16 @@ const th0Class = computed(() => {
 })
 
 const emits = defineEmits<{
-    (e: 'sort', c: Column): void
+    (e: 'sort', c: Column): void,
+    (e: 'setting', c: Column): void,
 }>()
 
 function onSortByColumn(c: Column) {
     emits('sort', c)
+}
+
+function onSetting(c: Column) {
+    emits('setting', c)
 }
 </script>
 <template>
@@ -60,25 +66,27 @@ function onSortByColumn(c: Column) {
         <template v-if="head.children">
             <div class="label border" :class="th0Class">{{ head.label }}</div>
             <div class="head-children">
-                <DataTableHead v-for="col in head.children" :head="col" :columns="columns" :columnWidths="columnWidths"
-                    :sort="sort" @sort="onSortByColumn">
+                <DataTableHead v-for="col in head.children" :head="col" :columns="columns" :columnWidths="columnWidths" :sort="sort" @sort="onSortByColumn">
                 </DataTableHead>
             </div>
         </template>
         <template v-else-if="column">
             <a class="label" :style="tdStyle" v-if="sort && column.sort" @click="onSortByColumn(column)">
-                <slot :name="'th-' + column.key" :column="column" :item="{}">
-                    {{ column.label }}
-                </slot>
-                <label>
-                    {{ column.sort == 'asc' ? '↑' : column.sort == 'desc' ? '↓' : '' }}
-                </label>
+                <span class="space line1">
+                    <slot :name="'th-' + column.key" :column="column" :item="{}">
+                        {{ column.label }}
+                    </slot>{{ column.sort == 'asc' ? '↑' : column.sort == 'desc' ? '↓' : '' }}
+                </span>
+                <IconSetting class="setting" @click.stop="onSetting(column)" v-if="column.setting" />
             </a>
-            <label class="label" :style="tdStyle" v-else>
-                <slot :name="'th-' + column.key" :column="column" :item="{}">
-                    {{ column.label }}
-                </slot>
-            </label>
+            <div class="label" :style="tdStyle" v-else>
+                <span class="space line1">
+                    <slot :name="'th-' + column.key" :column="column" :item="{}">
+                        {{ column.label }}
+                    </slot>
+                </span>
+                <IconSetting class="setting" @click.stop="onSetting(column)" v-if="column.setting" />
+            </div>
         </template>
     </div>
 </template>
@@ -90,11 +98,29 @@ function onSortByColumn(c: Column) {
     flex-direction: column;
 
     .label {
+        display: flex;
+        align-items: center;
         width: 100%;
         height: 32px;
         line-height: 32px;
         padding: 0 8px;
         text-align: center;
+
+        .setting {
+            display: none;
+            cursor: pointer;
+            fill: var(--color-text3);
+
+            &:hover {
+                fill: var(--color-text1);
+            }
+        }
+
+        &:hover {
+            .setting {
+                display: block;
+            }
+        }
     }
 
     .head-children {

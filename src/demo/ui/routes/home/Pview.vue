@@ -61,9 +61,10 @@ const temp = reactive({
 })
 
 const columns = ref<Column[]>([
-    { key: 'key', label: 'f1', width: 100, fixed: true },
-    { key: 'label', label: 'f2', width: 1000 },
-    { key: 'p3', label: 'f3', width: 100, suffix: true },
+    { key: 'key', label: '阿斯蒂芬阿斯蒂芬安师傅按手阿萨德a', width: 100, fixed: true, sort: 'none', setting: true },
+    { key: 'label', label: 'f2223', width: 500, sort: 'none', align: 'right', setting: true },
+    { key: 'label2', label: 'f2', width: 500, sort: 'none' },
+    { key: 'p3', label: '阿斯蒂芬阿斯蒂芬安师傅按手阿萨德a', width: 100, suffix: true, setting: true },
 ])
 
 const tdata = ref<any[]>([
@@ -72,6 +73,10 @@ const tdata = ref<any[]>([
     { key: '13', label: '123', p3: 'sdag' },
     { key: '13', label: '123', p3: 'sdag' },
 ])
+
+function onTableSetting(c: Column) {
+    console.info('table setting', c)
+}
 
 function onAlert() {
     context.device.prompt('hello world')
@@ -206,7 +211,7 @@ async function onUpload(file: File) {
             </TabPages>
         </div>
         <div class="options" style="height:200px">
-            <DataTable :columns="columns" :data="tdata"></DataTable>
+            <DataTable :columns="columns" :data="tdata" :sort="true" @setting="onTableSetting"></DataTable>
         </div>
         <div class="options">
             <Pagination :page="3" :size="20" :total="100"></Pagination>
