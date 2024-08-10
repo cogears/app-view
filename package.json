@@ -1,0 +1,45 @@
+{
+    "name": "@cogears/app-view",
+    "version": "1.2.1",
+    "description": "app view component for render",
+    "type": "module",
+    "main": "dist/app-view.js",
+    "types": "types/index.d.ts",
+    "files": [
+        "dist/**",
+        "types/**"
+    ],
+    "scripts": {
+        "dev": "vite",
+        "build": "vue-tsc && vite build",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "quill": "^1.3.7",
+        "quill-image-uploader": "^1.3.0",
+        "vue": "^3.4.21"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-vue": "^5.0.4",
+        "sass": "^1.75.0",
+        "typescript": "^5.2.2",
+        "vite": "^5.2.0",
+        "vue-tsc": "^2.0.6"
+    },
+    "peerDependencies": {
+        "@cogears/http-client": "^1.1.7",
+        "vue-router": "^4.3.2"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/cogears/app-view.git"
+    },
+    "author": "stone",
+    "bugs": {
+        "url": "https://github.com/cogears/app-view/issues"
+    },
+    "homepage": "https://github.com/cogears/app-view#readme",
+    "engines": {
+        "node": ">= 20.0.0"
+    }
+}
