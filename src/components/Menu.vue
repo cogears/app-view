@@ -14,11 +14,15 @@ function onSelected(items: MenuOption<any>[]) {
     emits('selected', items)
 }
 
+function isNull(item: MenuOption<any>) {
+    return item.key == undefined || item.key == null
+}
+
 </script>
 <template>
     <div class="menu popup">
         <template v-for="item in options">
-            <MenuItem :item="item" :mode="mode" @selected="onSelected" v-if="item.key">
+            <MenuItem :item="item" :mode="mode" @selected="onSelected" v-if="isNull(item.key)">
             </MenuItem>
             <div class="separate" v-else></div>
         </template>
