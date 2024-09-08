@@ -40,7 +40,7 @@ async function onClick() {
 }
 </script>
 <template>
-    <Link :class="cls" v-if="isLink" @click="onClick">
+    <Link :color="options.color" :class="cls" v-if="isLink" @click="onClick">
     {{ label }}
     </Link>
     <span :class="cls" v-else>{{ label }}</span>
