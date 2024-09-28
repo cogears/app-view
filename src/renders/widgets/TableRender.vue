@@ -150,10 +150,14 @@ export default defineComponent({
             ctx.emit('action', { action, resolve, reject })
         }
 
-        function onSetting(c: Column) {
-            let field = props.options.fields.find(item => item.key == c.key)
-            if (field) {
-
+        async function onSort(c: Column) {
+            if (props.options.onSort) {
+                for (let action of props.options.onSort) {
+                    let data = [c, ...action.data]
+                    await new Promise((resolve, reject) => {
+                        ctx.emit('action', { action: { name: action.name, data }, resolve, reject })
+                    })
+                }
             }
         }
 
@@ -181,7 +185,7 @@ export default defineComponent({
                 serial: props.options.serial,
                 selectable: true,
                 onSelected: onSelected,
-                onSetting: onSetting,
+                onSort: onSort,
             }, slots)
         }
     },

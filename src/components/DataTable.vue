@@ -115,7 +115,6 @@ const emits = defineEmits<{
     (e: 'scroll', data: { y: number, height: number, percent: number }): void
     (e: 'load', data: any[]): void
     (e: 'sort', c: Column): void
-    (e: 'setting', c: Column): void
     (e: 'selected', item: any): void
     (e: 'execute', item: any): void
     (e: 'contextmenu', data: { evt: MouseEvent, item: any, index: number }): void
@@ -351,10 +350,6 @@ function onContextMenu0(i: number, e: MouseEvent) {
     }
 }
 
-function onSetting(c: Column) {
-    emits('setting', c)
-}
-
 function onSortByColumn(c: Column) {
     for (let item of props.columns) {
         if (item == c) {
@@ -494,7 +489,7 @@ function onMouseDownScrollbar() {
             <div class="fixed" :class="{ shadowX: fixShadowX }">
                 <div class="columns headers">
                     <span class="td-serial" v-if="serial">序号</span>
-                    <DataTableHead v-for="head in fixedHeaders" :head="head" :columns="columns" :columnWidths="columnWidths" :sort="sort" @setting="onSetting" @sort="onSortByColumn">
+                    <DataTableHead v-for="head in fixedHeaders" :head="head" :columns="columns" :columnWidths="columnWidths" :sort="sort" @sort="onSortByColumn">
                         <template v-for="(_item, key, index) in $slots" :key="index" v-slot:[key]="data">
                             <slot :name="key" v-bind="data"></slot>
                         </template>
@@ -503,7 +498,7 @@ function onMouseDownScrollbar() {
             </div>
             <div class="scroller" ref="head">
                 <div class="columns headers">
-                    <DataTableHead v-for="head in scrollHeaders" :head="head" :columns="columns" :columnWidths="columnWidths" :sort="sort" @setting="onSetting" @sort="onSortByColumn">
+                    <DataTableHead v-for="head in scrollHeaders" :head="head" :columns="columns" :columnWidths="columnWidths" :sort="sort" @sort="onSortByColumn">
                         <template v-for="(_item, key, index) in $slots" :key="index" v-slot:[key]="data">
                             <slot :name="key" v-bind="data"></slot>
                         </template>
@@ -512,7 +507,7 @@ function onMouseDownScrollbar() {
             </div>
             <div class="suffixed" :class="{ shadowX2: suffixShadowX }" v-if="suffixedHeaders.length">
                 <div class="columns headers">
-                    <DataTableHead v-for="head in suffixedHeaders" :head="head" :columns="columns" :columnWidths="columnWidths" :sort="sort" @setting="onSetting" @sort="onSortByColumn">
+                    <DataTableHead v-for="head in suffixedHeaders" :head="head" :columns="columns" :columnWidths="columnWidths" :sort="sort" @sort="onSortByColumn">
                         <template v-for="(_item, key, index) in $slots" :key="index" v-slot:[key]="data">
                             <slot :name="key" v-bind="data"></slot>
                         </template>

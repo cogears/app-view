@@ -6,7 +6,6 @@ export default {
 <script setup lang="ts">
 import { Column, ColumnHeader } from 'types';
 import { computed } from 'vue';
-import IconSetting from './icons/IconSetting.vue'
 
 const props = defineProps<{
     head: ColumnHeader,
@@ -50,16 +49,12 @@ const th0Class = computed(() => {
 
 const emits = defineEmits<{
     (e: 'sort', c: Column): void,
-    (e: 'setting', c: Column): void,
 }>()
 
 function onSortByColumn(c: Column) {
     emits('sort', c)
 }
 
-function onSetting(c: Column) {
-    emits('setting', c)
-}
 </script>
 <template>
     <div class="data-table-head" :class="thClass" :style="thStyle">
@@ -77,7 +72,6 @@ function onSetting(c: Column) {
                         {{ column.label }}
                     </slot>{{ column.sort == 'asc' ? '↑' : column.sort == 'desc' ? '↓' : '' }}
                 </span>
-                <IconSetting class="setting" @click.stop="onSetting(column)" v-if="column.setting" />
             </a>
             <div class="label" :style="tdStyle" v-else>
                 <span class="space line1">
@@ -85,7 +79,6 @@ function onSetting(c: Column) {
                         {{ column.label }}
                     </slot>
                 </span>
-                <IconSetting class="setting" @click.stop="onSetting(column)" v-if="column.setting" />
             </div>
         </template>
     </div>

@@ -61,10 +61,10 @@ const temp = reactive({
 })
 
 const columns = ref<Column[]>([
-    { key: 'key', label: '阿斯蒂芬阿斯蒂芬安师傅按手阿萨德a', width: 100, fixed: true, sort: 'none', setting: true },
-    { key: 'label', label: 'f2223', width: 500, sort: 'none', align: 'right', setting: true },
+    { key: 'key', label: '阿斯蒂芬阿斯蒂芬安师傅按手阿萨德a', width: 100, fixed: true, sort: 'none' },
+    { key: 'label', label: 'f2223', width: 500, sort: 'none', align: 'right' },
     { key: 'label2', label: 'f2', width: 500, sort: 'none' },
-    { key: 'p3', label: '阿斯蒂芬阿斯蒂芬安师傅按手阿萨德a', width: 100, suffix: true, setting: true },
+    { key: 'p3', label: '阿斯蒂芬阿斯蒂芬安师傅按手阿萨德a', width: 100, suffix: true },
 ])
 
 const tdata = ref<any[]>([

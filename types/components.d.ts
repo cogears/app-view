@@ -46,7 +46,6 @@ export interface Column {
     align?: 'left' | 'center' | 'right',
     bold?: boolean,
     sort?: 'asc' | 'desc' | 'none',
-    setting?: boolean,
     orderBy?: string,
     bgClass?: string,
 }

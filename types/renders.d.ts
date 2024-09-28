@@ -285,6 +285,7 @@ export interface TableOptions {
     selectLimit?: number,
     serial?: boolean,
     onSelected?: Action[],
+    onSort?: Action[],
 }
 
 interface TableFieldOptions {
