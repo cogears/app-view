@@ -200,7 +200,7 @@ function deployDataSource(pageOffsetIndex: number, pageOffsetTop: number) {
     } else {
         if (temp.dataSourceRefresh) {
             temp.dataSourceRefresh = false
-            temp.dataSource = props.data
+            temp.dataSource = props.data.slice()
             emits('load', temp.dataSource)
         }
     }

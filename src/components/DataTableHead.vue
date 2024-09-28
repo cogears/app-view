@@ -51,8 +51,8 @@ const emits = defineEmits<{
     (e: 'sort', c: Column): void,
 }>()
 
-function onSortByColumn(c: Column) {
-    emits('sort', c)
+function onSortByColumn() {
+    emits('sort', column.value)
 }
 
 </script>
@@ -66,11 +66,12 @@ function onSortByColumn(c: Column) {
             </div>
         </template>
         <template v-else-if="column">
-            <a class="label" :style="tdStyle" v-if="sort && column.sort" @click="onSortByColumn(column)">
+            <a class="label" :style="tdStyle" v-if="sort && column.sort" @click="onSortByColumn">
                 <span class="space line1">
                     <slot :name="'th-' + column.key" :column="column" :item="{}">
                         {{ column.label }}
-                    </slot>{{ column.sort == 'asc' ? '↑' : column.sort == 'desc' ? '↓' : '' }}
+                    </slot>
+                    {{ column.sort == 'asc' ? '↑' : column.sort == 'desc' ? '↓' : '' }}
                 </span>
             </a>
             <div class="label" :style="tdStyle" v-else>

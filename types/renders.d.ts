@@ -298,6 +298,7 @@ interface TableFieldOptions {
     fixed?: boolean,
     suffix?: boolean,
     sort?: 'asc' | 'desc' | 'none',
+    orderBy?: string,
     align?: 'left' | 'center' | 'right',
     contents?: NodeOptions[],
 }

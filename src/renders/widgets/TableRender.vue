@@ -38,6 +38,7 @@ export default defineComponent({
                 fixed: field.fixed,
                 suffix: field.suffix,
                 sort: field.sort,
+                orderBy: field.orderBy,
                 align: field.align,
             }))
             if (props.options.select) {
