@@ -4,21 +4,19 @@
 name: Node.js Package
 
 on:
-  push:
-    branches: [ "master" ]
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
         with:
           node-version: 20
-      - run: npm install
+      - run: npm ci
       - run: npm run build
-      - uses: actions/upload-artifact@v3.2.1-node20
+      - uses: actions/upload-artifact@v3
         with:
           name: dist
           path: dist
@@ -27,12 +25,12 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
-      - uses: actions/download-artifact@v4.1.8
+      - uses: actions/download-artifact@v3
         with:
           name: dist
           path: dist
