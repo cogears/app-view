@@ -152,9 +152,10 @@ export default defineComponent({
         }
 
         async function onSort(c: Column) {
+            tableState.value.sort=c
             if (props.options.onSort) {
                 for (let action of props.options.onSort) {
-                    let data = [c, ...action.data]
+                    let data = [...action.data]
                     await new Promise((resolve, reject) => {
                         ctx.emit('action', { action: { name: action.name, data }, resolve, reject })
                     })

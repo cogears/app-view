@@ -274,6 +274,7 @@ export interface TableState {
     total: number,
     loading: boolean,
     selected: any[],
+    sort: Column | undefined,
 }
 
 export interface TableOptions {
