@@ -202,6 +202,7 @@ export interface InputOptions {
 
 export interface HtmlEditorOptions {
     name: string,
+    version: string,
     placeholder?: string,
 }
 
