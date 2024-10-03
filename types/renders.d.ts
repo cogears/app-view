@@ -285,6 +285,7 @@ export interface TableOptions {
     select?: boolean,
     selectLimit?: number,
     serial?: boolean,
+    big?: boolean,
     onSelected?: Action[],
     onSort?: Action[],
 }

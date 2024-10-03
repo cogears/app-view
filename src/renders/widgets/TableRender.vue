@@ -152,7 +152,7 @@ export default defineComponent({
         }
 
         async function onSort(c: Column) {
-            tableState.value.sort=c
+            tableState.value.sort = c
             if (props.options.onSort) {
                 for (let action of props.options.onSort) {
                     let data = [...action.data]
@@ -185,6 +185,7 @@ export default defineComponent({
                 loading: loading.value,
                 sort: true,
                 serial: props.options.serial,
+                big: props.options.big,
                 selectable: true,
                 onSelected: onSelected,
                 onSort: onSort,
