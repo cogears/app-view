@@ -2,7 +2,7 @@
 import Quill from 'quill';
 import ImageUploader from 'quill-image-uploader';
 import 'quill/dist/quill.snow.css';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 
 Quill.register("modules/imageUploader", ImageUploader);
 
@@ -20,6 +20,7 @@ const emits = defineEmits<{
 
 const self = ref<HTMLDivElement>()
 const editor = ref<HTMLDivElement>()
+const quill = ref<any>()
 onMounted(() => {
     if (editor.value) {
         const options: any = {
@@ -50,11 +51,17 @@ onMounted(() => {
                 upload: props.upload
             }
         }
-        const quill = new Quill(editor.value, options);
-        quill.on('text-change', () => {
-            emits('update:value', quill.root.innerHTML)
+        quill.value = new Quill(editor.value, options);
+        quill.value.on('text-change', () => {
+            emits('update:value', quill.value.root.innerHTML)
         })
-        quill.root.innerHTML = props.value
+        quill.value.root.innerHTML = props.value
+    }
+})
+
+watch(() => props.value, () => {
+    if (quill.value) {
+        quill.value.root.innerHTML = props.value
     }
 })
 
