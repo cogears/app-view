@@ -8,11 +8,13 @@ const props = withDefaults(defineProps<{
     disabled?: boolean,
     readonly?: boolean,
     frameless?: boolean,
+    focus?: boolean,
 }>(), {
     placeholder: '请选择...',
     disabled: false,
     readonly: false,
     frameless: false,
+    focus: false,
 })
 const self = ref<HTMLDivElement>()
 const temp = reactive({
@@ -30,7 +32,7 @@ async function onShowDropMenu() {
 }
 </script>
 <template>
-    <a class="combobox current frame border" ref="self" :class="{ focus: temp.dropVisible, disabled: disabled, readonly: readonly, frameless: frameless }" @click="onShowDropMenu">
+    <a class="combobox current frame border" ref="self" :class="{ focus: temp.dropVisible || focus, disabled: disabled, readonly: readonly, frameless: frameless }" @click="onShowDropMenu">
         <span class="space line1 text1">
             <slot><label class="placeholder text3">{{ placeholder }}</label></slot>
         </span>

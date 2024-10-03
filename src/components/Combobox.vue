@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { MenuOption } from 'types';
-import { computed, inject, reactive } from 'vue';
+import { computed, inject, reactive, watch } from 'vue';
 import ViewContext from '../ViewContext';
 import ComboboxInput from './ComboboxInput.vue';
 import IconClose from './icons/IconClose.vue';
-import Input from './Input.vue';
 const context = inject(ViewContext.NAME) as ViewContext
 const props = withDefaults(defineProps<{
     options: MenuOption<any>[],
@@ -37,12 +36,25 @@ const selectedItems = computed(() => {
     }
 })
 const temp = reactive({
-    inputValue: ''
+    inputValue: '',
+    focus: false,
 })
 const emits = defineEmits<{
     (e: "update:value", value: any | any[]): void
     (e: 'change'): void
 }>()
+
+watch(() => props.value, () => {
+    if (selectedItems.value.length > 0) {
+        if (props.multiple) {
+            temp.inputValue = selectedItems.value.map(item => item.label).join(',')
+        } else {
+            temp.inputValue = selectedItems.value[0].label
+        }
+    } else {
+        temp.inputValue = ''
+    }
+})
 
 function onItemSelected(key: any[]) {
     if (props.multiple) {
@@ -67,6 +79,7 @@ async function onShowDropMenu(pos: DOMRect) {
         let text = temp.inputValue.trim()
         if (text) {
             options = options.filter(item => item.label.indexOf(text) >= 0)
+            options = options.slice(0, 10)
         } else {
             options = []
         }
@@ -90,9 +103,9 @@ function onClear() {
 }
 </script>
 <template>
-    <ComboboxInput :disabled="disabled" :readonly="readonly" :frameless="frameless" :placeholder="placeholder" :onDrop="onShowDropMenu">
+    <ComboboxInput :focus="temp.focus" :disabled="disabled" :readonly="readonly" :frameless="frameless" :placeholder="placeholder" :onDrop="onShowDropMenu">
         <template v-if="inputMode">
-            <Input v-model:value="temp.inputValue" :placeholder="placeholder" frameless @change="onInputChanged"></Input>
+            <input class="input" v-model="temp.inputValue" :placeholder="placeholder" @focus="temp.focus = true" @blur="temp.focus = false" @input="onInputChanged">
         </template>
         <template v-else>
             <template v-if="selectedItems.length > 0">
@@ -109,6 +122,13 @@ function onClear() {
     </ComboboxInput>
 </template>
 <style scoped lang="scss">
+.input {
+    width: 100%;
+    height: 2.5em;
+    background-color: transparent;
+    border: 0;
+}
+
 .values {
     display: flex;
     align-items: center;

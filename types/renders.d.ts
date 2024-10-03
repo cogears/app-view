@@ -249,6 +249,7 @@ export interface SelectOptions {
     source: string | Option<any>[],
     placeholder?: string,
     disabled?: string,
+    inputMode?: boolean,
     onChanged?: Action[],
 }
 

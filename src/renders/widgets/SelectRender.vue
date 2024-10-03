@@ -38,8 +38,7 @@ async function onChanged() {
 }
 </script>
 <template>
-    <Combobox :options="source" v-model:value="value" :placeholder="options.placeholder" :clearVisible="true"
-        :disabled="disabled" @change="onChanged"></Combobox>
+    <Combobox :options="source" v-model:value="value" :placeholder="options.placeholder" :inputMode="options.inputMode" :clearVisible="true" :disabled="disabled" @change="onChanged"></Combobox>
 </template>
 <style scoped lang="scss">
 .combobox {
