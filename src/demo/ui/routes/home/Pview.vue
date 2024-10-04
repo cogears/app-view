@@ -217,6 +217,7 @@ async function onUpload(file: File) {
             <Pagination :page="3" :size="20" :total="100"></Pagination>
         </div>
         <div class="options">
+            <Input placeholder="请输入内容..." password />
             <Input :textarea="true"></Input>
         </div>
     </div>

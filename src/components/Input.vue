@@ -1,4 +1,6 @@
 <script lang='ts' setup>
+import IconEye from '@/components/icons/IconEye.vue';
+import IconEyeClose from '@/components/icons/IconEyeClose.vue';
 import { IInput } from 'types';
 import { inject, reactive, ref, watchEffect } from 'vue';
 import ViewContext from '../ViewContext';
@@ -36,6 +38,7 @@ const input = ref<HTMLInputElement>()
 const temp = reactive({
     focus: false,
     content: '',
+    eye: false,
 })
 defineExpose<IInput>({
     focus() {
@@ -73,24 +76,23 @@ function onKeydown(e: KeyboardEvent) {
 }
 </script>
 <template>
-    <div class="input frame border"
-        :class="{ round: round, focus: temp.focus, textarea: textarea, disabled: disabled, readonly: readonly }">
+    <div class="input frame border" :class="{ round: round, focus: temp.focus, textarea: textarea, disabled: disabled, readonly: readonly }">
         <slot name="prefix">
             <span class="blank"></span>
             <slot name="prefix-icon"></slot>
         </slot>
-        <textarea v-if="textarea" ref="input" v-model="temp.content" :placeholder="placeholder" @input="onChanged"
-            @focus="onFocus" @blur="onBlur" @keydown.stop="onKeydown" :readonly="readonly" :maxlength="maxlength"
-            :disabled="disabled"></textarea>
-        <input v-else ref="input" v-model="temp.content" :type="password ? 'password' : 'text'"
-            :placeholder="placeholder" :maxlength="maxlength" @input="onChanged" @focus="onFocus" @blur="onBlur"
-            @keydown.stop="onKeydown" :readonly="readonly" :disabled="disabled">
+        <textarea v-if="textarea" ref="input" v-model="temp.content" :placeholder="placeholder" @input="onChanged" @focus="onFocus" @blur="onBlur" @keydown.stop="onKeydown" :readonly="readonly" :maxlength="maxlength" :disabled="disabled"></textarea>
+        <input v-else ref="input" v-model="temp.content" :type="password && !temp.eye ? 'password' : 'text'" :placeholder="placeholder" :maxlength="maxlength" @input="onChanged" @focus="onFocus" @blur="onBlur" @keydown.stop="onKeydown" :readonly="readonly" :disabled="disabled">
         <slot name="suffix">
-            <slot name="suffix-icon"></slot>
+            <slot name="suffix-icon">
+                <template v-if="password">
+                    <IconEye class="search" @click="temp.eye = false" v-if="temp.eye"></IconEye>
+                    <IconEyeClose class="search" @click="temp.eye = true" v-else></IconEyeClose>
+                </template>
+            </slot>
             <span class="blank"></span>
         </slot>
-        <div class="max-tip" :class="{ red: temp.content.length == maxlength }"
-            v-if="maxTip && typeof temp.content == 'string'">{{ temp.content.length }}/{{ maxlength }}
+        <div class="max-tip" :class="{ red: temp.content.length == maxlength }" v-if="maxTip && typeof temp.content == 'string'">{{ temp.content.length }}/{{ maxlength }}
         </div>
     </div>
 </template>

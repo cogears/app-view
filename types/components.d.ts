@@ -285,6 +285,14 @@ export const IconClose: DefineComponent<{
     direction?: 'up' | 'down' | 'left'
 }>
 
+export const IconEye: DefineComponent<{
+    direction?: 'up' | 'down' | 'left'
+}>
+
+export const IconEyeClose: DefineComponent<{
+    direction?: 'up' | 'down' | 'left'
+}>
+
 export const IconLoading: DefineComponent<{
     direction?: 'up' | 'down' | 'left'
 }>

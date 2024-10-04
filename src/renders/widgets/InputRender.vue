@@ -12,6 +12,7 @@ const props = defineProps<{
 }>()
 
 const isNumber = computed(() => props.options.type == 'number')
+const isPassword = computed(() => props.options.type == 'password')
 const value = computed<any>({
     get() {
         return fetchValue(props.state, props.options.name)
@@ -60,7 +61,7 @@ async function onEnter() {
 }
 </script>
 <template>
-    <Input v-model:value="value" :placeholder="options.placeholder" :textarea="options.textarea" :disabled="disabled" :maxlength="options.maxlength" :maxTip="!!(options.maxlength && options.maxlength > 0)" @blur="onBlur" @change="onChanged" @keydown.enter="onEnter">
+    <Input v-model:value="value" :password="isPassword" :placeholder="options.placeholder" :textarea="options.textarea" :disabled="disabled" :maxlength="options.maxlength" :maxTip="!!(options.maxlength && options.maxlength > 0)" @blur="onBlur" @change="onChanged" @keydown.enter="onEnter">
     <template #suffix-icon v-if="options.type == 'search'">
         <IconSearch class="search" @click="onEnter" />
     </template>

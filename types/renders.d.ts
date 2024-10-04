@@ -191,7 +191,7 @@ export interface ButtonOptions {
 
 export interface InputOptions {
     name: string,
-    type?: 'text' | 'number' | 'search',
+    type?: 'text' | 'password' | 'number' | 'search',
     textarea?: boolean,
     placeholder?: string,
     maxlength?: number,
