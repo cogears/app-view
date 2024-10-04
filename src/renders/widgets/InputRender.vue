@@ -22,7 +22,7 @@ const value = computed<any>({
     }
 })
 
-const disabled = computed(() => props.options.disabled ? fetchValue(props.state, props.options.disabled) : false)
+const disabled = computed(() => props.options.disabled ? !!fetchValue(props.state, props.options.disabled) : false)
 
 const emits = defineEmits<{
     (e: 'action', event: ActionEvent): void

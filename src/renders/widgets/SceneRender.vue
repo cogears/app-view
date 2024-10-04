@@ -92,7 +92,8 @@ async function onAction({ action, resolve, reject }: ActionEvent) {
             }
             let result = await controller.execute(context, data, sceneState.value)
             resolve && resolve(result)
-        } catch (e) {
+        } catch (e: any) {
+            context.device.toast(e.message)
             if (reject) {
                 reject(e)
             } else {

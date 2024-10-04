@@ -31,7 +31,7 @@ export function setupValue(data: any, key: string, value: any): void
 // 复制数据
 export function copyValue(source: any): any
 
-export interface Formatter {
+export const formatter: {
     n2(value: number): string
     date(timestamp: number, format: string = '{YYYY}-{MM}-{DD}'): string
     time(timestamp: number, format: string = '{hh}:{mm}:{ss}'): string
@@ -45,8 +45,7 @@ export interface Formatter {
     fileSize(value: number): string
     mask(value: string): string
     text(template: string, env: any, nullReplace?: string): string
-}
-
+};
 
 export interface EventListener {
     (event: string, ...args: Array<any>): void;
