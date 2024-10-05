@@ -40,9 +40,14 @@ async function onClick() {
 }
 </script>
 <template>
-    <Link :color="options.color" :class="cls" v-if="isLink" @click="onClick">
+    <Link class="text-render" :color="options.color" :class="cls" v-if="isLink" @click="onClick">
     {{ label }}
     </Link>
-    <span :class="cls" v-else>{{ label }}</span>
+    <span class="text-render" :class="cls" v-else>{{ label }}</span>
 </template>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.text-render {
+    white-space: wrap;
+    word-break: break-all;
+}
+</style>
