@@ -41,6 +41,7 @@ async function onLogin() {
         temp.loading = true
         await props.login(temp.username, temp.password)
     } catch (e) {
+        console.error(e)
         context.device.toast('账号不存在，或者密码不正确')
     } finally {
         temp.loading = false
@@ -59,12 +60,10 @@ function onNext() {
             <div class="form panel shadow">
                 <div class="title text1">{{ appName }}</div>
                 <div class="option">
-                    <Input ref="username" v-model:value="temp.username" placeholder="请输入登录账号"
-                        @keydown.enter="onNext"></Input>
+                    <Input ref="username" v-model:value="temp.username" placeholder="请输入登录账号" @keydown.enter="onNext"></Input>
                 </div>
                 <div class="option">
-                    <Input ref="password" v-model:value="temp.password" placeholder="请输入登录密码" password
-                        @keydown.enter="onLogin"></Input>
+                    <Input ref="password" v-model:value="temp.password" placeholder="请输入登录密码" password @keydown.enter="onLogin"></Input>
                 </div>
                 <div class="tip text3">
                     <slot name="tip"></slot>

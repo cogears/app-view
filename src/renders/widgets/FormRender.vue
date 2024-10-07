@@ -58,6 +58,6 @@ async function onSubmit(event: ActionEvent) {
 
 </script>
 <template>
-    <ContainerRender :options="options" :state="state" @action="onAction"></ContainerRender>
+    <ContainerRender :options="options" :state="state" :loading="temp.submitting" @action="onAction"></ContainerRender>
 </template>
 <style scoped lang="scss"></style>

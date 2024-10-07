@@ -26,7 +26,7 @@ const upload = computed(() => {
     if (context.appUpload) {
         const uploadHandler = context.appUpload
         return (file: File) => {
-            return uploadHandler.execute(context, file, props.state)
+            return uploadHandler.execute(context, [file, 'image'], props.state)
         }
     }
 })

@@ -2,10 +2,12 @@
 import { ActionEvent, ContainerOptions } from 'types';
 import { computed } from 'vue';
 import NodeRender from './NodeRender.vue';
+import Loading from '@/components/Loading.vue';
 
 const props = defineProps<{
     options: ContainerOptions,
     state: any,
+    loading?: boolean
 }>()
 
 const classnames = computed(() => {
@@ -24,6 +26,7 @@ function onAction(event: ActionEvent) {
 <template>
     <div class="container-render" :class="classnames">
         <NodeRender v-for="item in options.children" :options="item" :state="state" @action="onAction"></NodeRender>
+        <Loading :visible="loading"></Loading>
     </div>
 </template>
 <style scoped lang="scss">
@@ -33,6 +36,7 @@ function onAction(event: ActionEvent) {
     height: 100%;
     line-height: 1.5;
     overflow: auto;
+    position: relative;
 
     &.row {
         &.left {

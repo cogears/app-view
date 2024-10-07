@@ -20,7 +20,7 @@ const emits = defineEmits<{
 
 async function onUpload(file: File): Promise<string> {
     if (context.appUpload) {
-        return await context.appUpload.execute(context, file, props.state)
+        return await context.appUpload.execute(context, [file, props.options.type], props.state)
     }
     throw new Error('应用未提供上传接口')
 }
@@ -38,8 +38,7 @@ async function onChanged() {
 }
 </script>
 <template>
-    <Uploader :value="value" :type="options.type" :accept="options.accept" :limit="options.limit" :upload="onUpload"
-        @change="onChanged">
+    <Uploader :value="value" :type="options.type" :accept="options.accept" :limit="options.limit" :upload="onUpload" @change="onChanged">
     </Uploader>
 </template>
 <style scoped lang="scss"></style>

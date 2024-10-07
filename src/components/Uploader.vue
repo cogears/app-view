@@ -117,6 +117,10 @@ function onVideoLoad(e: any, item: any) {
                     <IconClose />
                 </a>
             </div>
+            <div class="box border upload" v-if="value.length + tasks.length < limit">
+                <div class="tip">点击上传</div>
+                <input ref="input" type="file" :multiple="limit > 1" :accept="accept0" @change="onChange">
+            </div>
         </div>
         <div class="video-view" v-if="type == 'video'">
             <div class="video" v-for="(item, i) in value">
@@ -132,6 +136,10 @@ function onVideoLoad(e: any, item: any) {
                 <a class="close" @click="onRemoveTask(i)">
                     <IconClose />
                 </a>
+            </div>
+            <div class="box border upload" v-if="value.length + tasks.length < limit">
+                <div class="tip">点击上传</div>
+                <input ref="input" type="file" :multiple="limit > 1" :accept="accept0" @change="onChange">
             </div>
         </div>
         <div class="audio-view" v-if="type == 'audio'">
@@ -149,6 +157,10 @@ function onVideoLoad(e: any, item: any) {
                     <IconClose />
                 </a>
             </div>
+            <div class="box border upload" v-if="value.length + tasks.length < limit">
+                <div class="tip">点击上传</div>
+                <input ref="input" type="file" :multiple="limit > 1" :accept="accept0" @change="onChange">
+            </div>
         </div>
         <div class="file-view" v-if="type == ''">
             <div class="file" v-for="(item) in value">{{ item.name }}</div>
@@ -160,10 +172,10 @@ function onVideoLoad(e: any, item: any) {
                     <IconClose />
                 </a>
             </div>
-        </div>
-        <div class="box border upload" v-if="value.length + tasks.length < limit">
-            <div class="tip">点击上传</div>
-            <input ref="input" type="file" :multiple="limit > 1" :accept="accept0" @change="onChange">
+            <div class="box border upload" v-if="value.length + tasks.length < limit">
+                <div class="tip">点击上传</div>
+                <input ref="input" type="file" :multiple="limit > 1" :accept="accept0" @change="onChange">
+            </div>
         </div>
     </div>
 </template>
