@@ -3,6 +3,7 @@ import { computed, inject, onBeforeUnmount, onMounted, reactive, watch } from 'v
 import ViewContext from '../ViewContext';
 import Loading from './Loading.vue';
 import IconClose from './icons/IconClose.vue';
+import IconMaximize from './icons/IconMaximize.vue';
 
 const context = inject(ViewContext.NAME) as ViewContext
 const props = withDefaults(defineProps<{
@@ -41,13 +42,23 @@ const temp = reactive({
     mouseX: 0,
     mouseY: 0,
     maskShake: false,
+    maximize: false,
 })
 const dialogStyle = computed(() => {
-    return {
-        width: props.width + 'px',
-        height: props.height + 'px',
-        left: temp.x + 'px',
-        top: temp.y + 'px',
+    if (temp.maximize) {
+        return {
+            width: '100%',
+            height: '100%',
+            left: '0px',
+            top: '0px',
+        }
+    } else {
+        return {
+            width: props.width + 'px',
+            height: props.height + 'px',
+            left: temp.x + 'px',
+            top: temp.y + 'px',
+        }
     }
 })
 
@@ -76,6 +87,10 @@ function onVisibleChange() {
             emits("close");
         }, 0);
     }
+}
+
+function onMaximize() {
+    temp.maximize = !temp.maximize
 }
 async function onClose() {
     if (props.shouldClose) {
@@ -107,6 +122,9 @@ function moveCenter() {
     }
 }
 function onMouseDown(e: MouseEvent) {
+    if (temp.maximize) {
+        return
+    }
     temp.moving = true;
     temp.mouseX = e.screenX;
     temp.mouseY = e.screenY;
@@ -159,9 +177,14 @@ function onClickMask() {
                     <Loading :visible="loading"></Loading>
                 </div>
                 <slot name="close">
-                    <a class="dialog-close" @click="onClose">
-                        <IconClose></IconClose>
-                    </a>
+                    <div class="window-bar">
+                        <a class="dialog-maximize" @click="onMaximize">
+                            <IconMaximize></IconMaximize>
+                        </a>
+                        <a class="dialog-close" @click="onClose">
+                            <IconClose></IconClose>
+                        </a>
+                    </div>
                 </slot>
             </div>
         </transition>
@@ -197,21 +220,25 @@ function onClickMask() {
         overflow: auto;
     }
 
-    .dialog-close {
+    .window-bar {
         position: absolute;
         right: 0;
         top: 0;
         display: flex;
-        align-items: center;
-        justify-content: center;
-        width: var(--size-label);
-        height: var(--size-label);
-        fill: var(--color-text2);
-        font-size: 20px;
 
-        &:hover {
-            fill: var(--color-white);
-            background-color: var(--color-app);
+        a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: var(--size-label);
+            height: var(--size-label);
+            fill: var(--color-text2);
+            font-size: 20px;
+
+            &:hover {
+                fill: var(--color-white);
+                background-color: var(--color-app);
+            }
         }
     }
 }

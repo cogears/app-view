@@ -17,6 +17,7 @@ import Uploader from '@/components/Uploader.vue';
 import Pagination from '@/components/Pagination.vue'
 import Link from '@/components/Link.vue'
 import IconSearch from '@/components/icons/IconSearch.vue'
+import Dialog from '@/components/Dialog.vue';
 
 const context = inject(ViewContext.NAME) as ViewContext
 const options = [
@@ -58,6 +59,7 @@ const temp = reactive({
     comValue: '',
     date: new Date(),
     tvalue: 'p1',
+    dvisible: false,
 })
 
 const columns = ref<Column[]>([
@@ -104,7 +106,7 @@ async function onUpload(file: File) {
                     <Button color="blue" theme="line" round>确定</Button>
                 </div>
                 <div class="options">
-                    <Button color="red">red</Button>
+                    <Button color="red" @click="temp.dvisible = true">red</Button>
                     <Button color="red" round>red</Button>
                     <Button color="red" round disabled>red</Button>
                     <Button color="red" theme="line">red</Button>
@@ -173,7 +175,8 @@ async function onUpload(file: File) {
                             </Input>
                         </div>
                         <div class="wrap">
-                            <Combobox :options="options" v-model:value="temp.comValue" style="width: 100px" :clear-visible="true"></Combobox>
+                            <Combobox :options="options" v-model:value="temp.comValue" style="width: 100px"
+                                :clear-visible="true"></Combobox>
                         </div>
                         <div class="wrap">
                             <Calendar v-model:value="temp.date"></Calendar>
@@ -220,6 +223,7 @@ async function onUpload(file: File) {
             <Input placeholder="请输入内容..." password />
             <Input :textarea="true"></Input>
         </div>
+        <Dialog title="Hello World" :width="480" :height="320" v-model:visible="temp.dvisible"></Dialog>
     </div>
 </template>
 <style scoped lang="scss">

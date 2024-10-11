@@ -3,6 +3,7 @@ import IconClose from "./IconClose.vue";
 import IconEye from "./IconEye.vue";
 import IconEyeClose from "./IconEyeClose.vue";
 import IconLoading from "./IconLoading.vue";
+import IconMaximize from './IconMaximize.vue';
 import IconNext from "./IconNext.vue";
 import IconNext2 from "./IconNext2.vue";
 import IconRight from "./IconRight.vue";
@@ -14,10 +15,11 @@ export {
     IconClose,
     IconEye, IconEyeClose,
     IconLoading,
+    IconMaximize,
     IconNext,
     IconNext2,
     IconRight,
     IconSearch,
-    IconSetting,
+    IconSetting
 };
 
