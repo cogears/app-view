@@ -65,7 +65,11 @@ export default class AppContext extends ViewContext {
             try {
                 return await this._domainApis[domain].request(api, options, this.appState)
             } catch (e: any) {
-                this.device.toast(e.message)
+                if (e.code == 401) {
+                    this.setOnline()
+                } else {
+                    this.device.toast(e.message)
+                }
                 throw e
             }
         }
