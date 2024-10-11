@@ -45,7 +45,7 @@ export default class DomainApi {
     postRequest(response: any): any {
         if (this.domain.validate) {
             if (this.domain.validate.value != response[this.domain.validate.key] + '') {
-                throw new Error(response[this.domain.validate.error])
+                throw Object.assign(new Error(response[this.domain.validate.error]), response)
             }
         }
         return this.domain.result ? response[this.domain.result] : response

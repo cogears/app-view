@@ -67,6 +67,7 @@ export default class AppContext extends ViewContext {
             } catch (e: any) {
                 if (e.code == 401) {
                     this.setOnline()
+                    window.location.reload()
                 } else {
                     this.device.toast(e.message)
                 }
