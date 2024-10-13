@@ -38,7 +38,10 @@ async function onChanged() {
 }
 </script>
 <template>
-    <Uploader :value="value" :type="options.type" :accept="options.accept" :limit="options.limit" :upload="onUpload" @change="onChanged">
-    </Uploader>
+    <div>
+        <Uploader :value="value" :type="options.type" :accept="options.accept" :limit="options.limit" :upload="onUpload" @change="onChanged">
+        </Uploader>
+        <div v-if="options.label">{{ options.label }}</div>
+    </div>
 </template>
 <style scoped lang="scss"></style>
