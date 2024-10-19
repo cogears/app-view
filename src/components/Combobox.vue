@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { MenuOption } from 'types';
-import { computed, inject, reactive, watch } from 'vue';
+import { computed, inject, reactive, watch, onMounted } from 'vue';
 import ViewContext from '../ViewContext';
 import ComboboxInput from './ComboboxInput.vue';
 import IconClose from './icons/IconClose.vue';
@@ -44,7 +44,18 @@ const emits = defineEmits<{
     (e: 'change'): void
 }>()
 
+onMounted(() => {
+    updateInput()
+})
+
 watch(() => props.value, () => {
+    updateInput()
+})
+watch(() => props.options, () => {
+    updateInput()
+})
+
+function updateInput() {
     if (selectedItems.value.length > 0) {
         if (props.multiple) {
             temp.inputValue = selectedItems.value.map(item => item.label).join(',')
@@ -54,7 +65,7 @@ watch(() => props.value, () => {
     } else {
         temp.inputValue = ''
     }
-})
+}
 
 function onItemSelected(key: any[]) {
     if (props.multiple) {

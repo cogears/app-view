@@ -3,6 +3,7 @@ import { fetchValue } from '@/common';
 import Pagination from '@/components/Pagination.vue';
 import { ActionEvent, PaginationOptions, PaginationState } from 'types';
 import { computed } from 'vue';
+import { formatter } from '@/common';
 
 const props = defineProps<{
     options: PaginationOptions,
@@ -32,11 +33,16 @@ async function onChanged() {
 }
 </script>
 <template>
-    <Pagination v-model:page="paginationState.page" :size="paginationState.size" :total="paginationState.total"
-        @change="onChanged"></Pagination>
+    <div class="pagination-render">
+        <span>共 {{ formatter.amount(paginationState.total, 0) }} 条</span>
+        <Pagination v-model:page="paginationState.page" v-model:size="paginationState.size" :total="paginationState.total" @change="onChanged"></Pagination>
+    </div>
 </template>
 <style scoped lang="scss">
-.pagination {
+.pagination-render {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
     padding: 16px 0;
 }

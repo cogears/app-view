@@ -2,6 +2,7 @@
 import { computed, ref, watchEffect } from "vue";
 const emits = defineEmits<{
     (e: "update:page", value: number): void,
+    (e: 'update:size', value: number): void,
     (e: 'change'): void,
 }>();
 const props = withDefaults(defineProps<{
@@ -43,21 +44,29 @@ function goTo(page: number) {
     emits('update:page', page)
     emits('change')
 }
+
+function setPageSize(value: number) {
+    emits('update:size', value)
+    emits('change')
+}
 </script>
 <template>
     <div class="pagination text3">
         <a class="btn border text2" :class="{ disabled: current == 0 }" @click="goTo(0)">第一页</a>
         <a class="btn border text2" :class="{ disabled: current == 0 }" @click="goTo(current - 1)">上一页</a>
         <span v-if="pages[0] > 0">...</span>
-        <a class="btn border text2 numbers" v-for="n in pages" :key="n" :class="{ on: n == current }"
-            @click="goTo(n)">{{ n +
-                    1
+        <a class="btn border text2 numbers" v-for="n in pages" :key="n" :class="{ on: n == current }" @click="goTo(n)">{{ n +
+            1
             }}</a>
         <span v-if="pages[pages.length - 1] < totalPages - 1">...</span>
-        <a class="btn border text2" :class="{ disabled: current == totalPages - 1 || total == 0 }"
-            @click="goTo(current + 1)">下一页</a>
-        <a class="btn border text2" :class="{ disabled: current == totalPages - 1 || total == 0 }"
-            @click="goTo(totalPages - 1)">最后一页</a>
+        <a class="btn border text2" :class="{ disabled: current == totalPages - 1 || total == 0 }" @click="goTo(current + 1)">下一页</a>
+        <a class="btn border text2" :class="{ disabled: current == totalPages - 1 || total == 0 }" @click="goTo(totalPages - 1)">最后一页</a>
+
+        <span style="margin-left: 60px;">每页</span>
+        <a class="btn border text2 numbers" :class="{ on: size == 20 }" @click="setPageSize(20)">20</a>
+        <a class="btn border text2 numbers" :class="{ on: size == 50 }" @click="setPageSize(50)">50</a>
+        <a class="btn border text2 numbers" :class="{ on: size == 100 }" @click="setPageSize(100)">100</a>
+        <span>条</span>
     </div>
 </template>
 <style scoped lang="scss">
