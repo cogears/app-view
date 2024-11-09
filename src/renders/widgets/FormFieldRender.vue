@@ -85,7 +85,7 @@ function onAction({ action, resolve, reject }: ActionEvent) {
     <div class="form-field-struct" ref="self" :class="classNames">
         <label class="form-field-label"><span v-if="options.require" class="red">*</span>{{ options.label }}：</label>
         <div>
-            <NodeRender :options="options.content" :state="state" @action="onAction" />
+            <NodeRender isField :options="options.content" :state="state" @action="onAction" />
         </div>
     </div>
 </template>

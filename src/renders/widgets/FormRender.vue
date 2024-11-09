@@ -41,8 +41,9 @@ async function onSubmit(event: ActionEvent) {
         let validCount = validateResult.filter(value => value).length
         if (validCount == fields.length) {
             for (let action of props.options.onSubmit) {
+                let data = [...action.data, ...event.action.data,]
                 await new Promise((resolve, reject) => {
-                    emits('action', { action, resolve, reject })
+                    emits('action', { action: { name: action.name, data }, resolve, reject })
                 })
             }
             event.resolve && event.resolve()

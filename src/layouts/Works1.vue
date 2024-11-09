@@ -179,6 +179,7 @@ $page-padding: 24px;
         height: 36px;
         padding-left: 32px;
         border-radius: 6px;
+        margin-top: 2px;
 
         i {
             position: absolute;

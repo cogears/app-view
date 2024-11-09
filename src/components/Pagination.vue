@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watchEffect } from "vue";
+import Combobox from "./Combobox.vue";
 const emits = defineEmits<{
     (e: "update:page", value: number): void,
     (e: 'update:size', value: number): void,
@@ -26,6 +27,19 @@ const pages = computed(() => {
     }
     return arr;
 });
+const pageSize = computed({
+    get() {
+        return props.size + ''
+    },
+    set(value) {
+        emits('update:size', +value)
+    }
+})
+const sizes = ref([
+    { key: 20, label: '20/页' },
+    { key: 50, label: '50/页' },
+    { key: 100, label: '100/页' },
+])
 
 watchEffect(() => {
     current.value = props.page
@@ -45,8 +59,9 @@ function goTo(page: number) {
     emits('change')
 }
 
-function setPageSize(value: number) {
-    emits('update:size', value)
+function onSizeChange() {
+    current.value = 0
+    emits('update:page', 0)
     emits('change')
 }
 </script>
@@ -61,12 +76,7 @@ function setPageSize(value: number) {
         <span v-if="pages[pages.length - 1] < totalPages - 1">...</span>
         <a class="btn border text2" :class="{ disabled: current == totalPages - 1 || total == 0 }" @click="goTo(current + 1)">下一页</a>
         <a class="btn border text2" :class="{ disabled: current == totalPages - 1 || total == 0 }" @click="goTo(totalPages - 1)">最后一页</a>
-
-        <span style="margin-left: 60px;">每页</span>
-        <a class="btn border text2 numbers" :class="{ on: size == 20 }" @click="setPageSize(20)">20</a>
-        <a class="btn border text2 numbers" :class="{ on: size == 50 }" @click="setPageSize(50)">50</a>
-        <a class="btn border text2 numbers" :class="{ on: size == 100 }" @click="setPageSize(100)">100</a>
-        <span>条</span>
+        <Combobox :options="sizes" v-model:value="pageSize" @change="onSizeChange"></Combobox>
     </div>
 </template>
 <style scoped lang="scss">
@@ -95,6 +105,11 @@ function setPageSize(value: number) {
             border-color: var(--color-app);
             color: var(--color-white);
         }
+    }
+
+    .combobox {
+        width: 90px;
+        height: 20px;
     }
 }
 </style>
