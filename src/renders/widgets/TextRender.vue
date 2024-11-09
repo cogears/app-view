@@ -47,7 +47,7 @@ async function onClick() {
 </template>
 <style scoped lang="scss">
 .text-render {
-    white-space: wrap;
+    white-space: pre-wrap;
     word-break: break-all;
 }
 </style>
