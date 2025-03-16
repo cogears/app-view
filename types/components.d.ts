@@ -62,7 +62,7 @@ export interface UploadFileItem {
     name: string, url: string, width: number, height: number, duration: number, size: number
 }
 
-export type Color = 'blue' | 'red' | 'green' | 'orange' | 'yellow' | 'purple' | 'magenta' | 'cyan' | 'gray' | 'text1' | 'text2' | 'text3'
+export type Color = 'blue' | 'red' | 'green' | 'orange' | 'yellow' | 'purple' | 'magenta' | 'cyan' | 'gray' | 'text1' | 'text2' | 'text3' | string
 
 export const Accordion: DefineComponent<{
     options: Option<T>[]

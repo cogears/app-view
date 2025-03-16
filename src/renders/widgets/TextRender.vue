@@ -9,12 +9,13 @@ const props = defineProps<{
     state: any,
 }>()
 
+const color = computed(() => formatter.text(props.options.color, props.state, ''))
 const isLink = computed(() => props.options.onClick)
 
 const cls = computed(() => {
     let arr: string[] = []
-    if (props.options.color) {
-        arr.push(props.options.color)
+    if (color.value) {
+        arr.push(color.value)
     }
     if (props.options.size) {
         arr.push(props.options.size)
@@ -40,7 +41,7 @@ async function onClick() {
 }
 </script>
 <template>
-    <Link class="text-render" :color="options.color" :class="cls" v-if="isLink" @click="onClick">
+    <Link class="text-render" :color="color" :class="cls" v-if="isLink" @click="onClick">
     {{ label }}
     </Link>
     <span class="text-render" :class="cls" v-else>{{ label }}</span>

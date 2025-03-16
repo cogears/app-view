@@ -9,10 +9,8 @@ const props = defineProps<{
     state: any,
 }>()
 
-const label = computed(() => {
-    let result = formatter.text(props.options.label, props.state)
-    return result
-})
+const label = computed(() => formatter.text(props.options.label, props.state))
+const color = computed(() => formatter.text(props.options.color, props.state))
 
 const emits = defineEmits<{
     (e: 'action', action: ActionEvent): void
@@ -28,7 +26,8 @@ async function onClick() {
 
 </script>
 <template>
-    <Button :color="options.color" :theme="options.theme" :round="options.round" :on="options.on" :readonly="options.readonly" :disabled="options.disabled" @click="onClick">{{ label }}</Button>
+    <Button :color="color" :theme="options.theme" :round="options.round" :on="options.on"
+        :readonly="options.readonly" :disabled="options.disabled" @click="onClick">{{ label }}</Button>
 </template>
 <style scoped lang="scss">
 .btn {
