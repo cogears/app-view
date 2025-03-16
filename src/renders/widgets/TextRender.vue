@@ -9,7 +9,7 @@ const props = defineProps<{
     state: any,
 }>()
 
-const color = computed(() => props.options.color ? formatter.text(props.options.color, props.state, '') : '')
+const color = computed(() => props.options.color ? formatter.text(props.options.color, props.state, '') : undefined)
 const isLink = computed(() => props.options.onClick)
 
 const cls = computed(() => {

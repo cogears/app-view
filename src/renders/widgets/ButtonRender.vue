@@ -10,7 +10,7 @@ const props = defineProps<{
 }>()
 
 const label = computed(() => formatter.text(props.options.label, props.state))
-const color = computed(() => props.options.color ? formatter.text(props.options.color, props.state) : '')
+const color = computed(() => props.options.color ? formatter.text(props.options.color, props.state) : undefined)
 
 const emits = defineEmits<{
     (e: 'action', action: ActionEvent): void
