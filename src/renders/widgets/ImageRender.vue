@@ -13,10 +13,17 @@ const temp = reactive({
     loading: false,
 })
 
-const imageStyle = computed(() => ({
-    width: props.options.width + 'px',
-    height: props.options.height + 'px',
-}))
+const imageStyle = computed(() => {
+    let css: any = {
+    }
+    if (props.options.width > 0) {
+        css.width = props.options.width + 'px'
+    }
+    if (props.options.height > 0) {
+        css.height = props.options.height + 'px'
+    }
+    return css
+})
 const imageUrl = computed(() => fetchValue(props.state, props.options.name))
 
 const emits = defineEmits<{
@@ -34,7 +41,8 @@ async function onClick() {
 }
 </script>
 <template>
-    <div class="image-render" :class="{ round: options.round }" :style="imageStyle" v-bg="imageUrl" @click="onClick">
+    <div class="image-render" :class="{ round: options.round }" :style="imageStyle" @click="onClick">
+        <img :src="imageUrl">
         <Loading :visible="temp.loading"></Loading>
     </div>
 </template>
@@ -42,6 +50,12 @@ async function onClick() {
 .image-render {
     position: relative;
     background-color: var(--color-frame);
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        height: 100%;
+    }
 
     &.round {
         border-radius: 50%;

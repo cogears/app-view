@@ -8,7 +8,7 @@ const props = defineProps<{
     options: ListOptions,
     state: any,
 }>()
-
+const direction = computed(() => props.options.direction || 'column')
 const source = computed(() => fetchValue(props.state, props.options.name))
 
 const emits = defineEmits<{
@@ -23,17 +23,22 @@ function onAction({ action, resolve, reject }: ActionEvent, item: any) {
 }
 </script>
 <template>
-    <div class="list-render">
-        <NodeRender v-for="item in source" :options="options.content" :state="item" @action="onAction($event, item)"></NodeRender>
+    <div class="list-render" :class="direction">
+        <NodeRender v-for="item in source" :options="options.content" :state="item" @action="onAction($event, item)">
+        </NodeRender>
     </div>
 </template>
 <style scoped lang="scss">
 .list-render {
     width: 100%;
 
-    .node-render {
-        padding: 1em 0;
-        border-bottom: 1px solid var(--color-border);
+    &.column {
+        .node-render {
+            padding: 1em 0;
+            border-bottom: 1px solid var(--color-border);
+        }
     }
+
+    &.row {}
 }
 </style>

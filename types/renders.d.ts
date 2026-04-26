@@ -332,7 +332,8 @@ export interface FormFieldOptions {
 
 export interface ListOptions {
     name: string,
-    content: NodeOptions
+    content: NodeOptions,
+    direction?: 'column' | 'row',
 }
 
 export interface IFrameOptions {
